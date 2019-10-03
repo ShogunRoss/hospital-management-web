@@ -13,15 +13,13 @@ const schema = {
   password: {
     presence: { allowEmpty: false, message: 'is required' },
     length: {
-      maximum: 128
+      minimum: 6,
+      maximum: 42
     }
   },
   confirmPassword: {
     equality: 'password',
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      maximum: 128
-    }
+    presence: { allowEmpty: false, message: 'is required' }
   }
 };
 

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Switch, Redirect, Router } from 'react-router-dom';
+import { Switch, Redirect, Router, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 
 import { RouteWithLayout } from 'components';
@@ -46,12 +46,7 @@ const Routes = () => {
           <Redirect from={routes.ADMIN} to={routes.SIGN_IN} />
         )}
 
-        <RouteWithLayout
-          exact
-          component={LandingView}
-          layout={MainLayout}
-          path={routes.HOME}
-        />
+        <Route exact component={LandingView} path={routes.HOME} />
 
         <RouteWithLayout
           component={NotFoundView}

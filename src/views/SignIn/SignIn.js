@@ -82,7 +82,7 @@ const SignIn = props => {
     if (data && data.signIn) {
       setAccessToken(data.signIn.accessToken);
     }
-    history.push(routes.ADMIN);
+    history.push(routes.DASHBOARD);
   };
 
   const hasError = field =>
