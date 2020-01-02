@@ -9,8 +9,8 @@ import 'react-perfect-scrollbar/dist/css/styles.css';
 import './assets/scss/index.scss';
 import validators from './common/validators';
 import Routes from './components/Routes';
-import { setAccessToken } from 'utils/accessToken';
-import { URL } from 'common/config';
+import { setAccessToken } from './utils/accessToken';
+import { URL } from './common/config';
 
 Chart.helpers.extend(Chart.elements.Rectangle.prototype, {
   draw: chartjs.draw
@@ -40,7 +40,7 @@ const App = () => {
 
   return (
     <ThemeProvider theme={theme}>
-      <Routes />;
+      <Routes />
     </ThemeProvider>
   );
 };

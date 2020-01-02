@@ -13,7 +13,7 @@ import {
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-import { SEND_FORGOT_PASSWORD_EMAIL } from 'utils/graphqlMutations';
+import { FORGOT_PASSWORD } from 'utils/graphqlMutations';
 import useStyles from './forgotPasswordStyles';
 import * as routes from 'common/routes';
 import AlertDialog from 'components/AlertDialog';
@@ -52,9 +52,7 @@ const ForgotPassword = props => {
     }));
   }, [formState.values]);
 
-  const [sendForgotPasswordEmail, { loading }] = useMutation(
-    SEND_FORGOT_PASSWORD_EMAIL
-  );
+  const [sendForgotPasswordEmail, { loading }] = useMutation(FORGOT_PASSWORD);
 
   const handleChange = event => {
     event.persist();

@@ -28,9 +28,9 @@ const CONFIRM_EMAIL = gql`
 
 //Used for sending an forgot password url to recipient's email
 //Get back true when success
-const SEND_FORGOT_PASSWORD_EMAIL = gql`
-  mutation SendForgotPasswordEmail($email: String!) {
-    sendForgotPasswordEmail(email: $email)
+const FORGOT_PASSWORD = gql`
+  mutation forgotPassword($email: String!) {
+    forgotPassword(email: $email)
   }
 `;
 
@@ -62,7 +62,7 @@ export {
   SIGN_IN,
   SIGN_UP,
   CONFIRM_EMAIL,
-  SEND_FORGOT_PASSWORD_EMAIL,
+  FORGOT_PASSWORD,
   CHANGE_PASSWORD,
   RESET_PASSWORD,
   SIGN_OUT

@@ -1,24 +1,26 @@
 import React from 'react';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
-import { Link as RouterLink } from 'react-router-dom';
-import { Grid, Typography, Button } from '@material-ui/core';
-
-import * as routes from 'common/routes';
+import { Grid, Typography } from '@material-ui/core';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    padding: theme.spacing(4)
+    padding: theme.spacing(4),
+    height: '100%'
   },
   content: {
-    paddingTop: 150,
-    textAlign: 'center'
+    textAlign: 'center',
+    '-ms-transform': 'translateY(50%)',
+    transform: 'translateY(50%)'
   },
   image: {
-    marginTop: 50,
+    marginTop: 42,
+    marginLeft: 42,
     display: 'inline-block',
     maxWidth: '100%',
-    width: 320
+    width: 250,
+    '-webkit-filter': 'drop-shadow( 3px 3px 3px rgba(0, 0, 0, .3))',
+    filter: 'drop-shadow( 3px 3px 3px rgba(0, 0, 0, .3))'
   },
   buttonDirect: {
     color: theme.palette.neutral,
@@ -34,25 +36,14 @@ const ConfirmNotification = props => {
   return (
     <div className={classes.root}>
       <Grid container justify="center" spacing={4}>
-        <Grid item lg={6} xs={12}>
+        <Grid item>
           <div className={classes.content}>
-            <Typography variant="h1">
-              Your email have been confirmed successfully!
-            </Typography>
+            <Typography variant="h1">Xác nhận email thành công!</Typography>
             <img
               alt="Under development"
               className={classes.image}
               src="/images/completed_task.svg"
             />
-            <br />
-            <Button
-              className={classes.buttonDirect}
-              variant="contained"
-              color="primary"
-              component={RouterLink}
-              to={routes.SIGN_IN}>
-              Direct to Sign In
-            </Button>
           </div>
         </Grid>
       </Grid>

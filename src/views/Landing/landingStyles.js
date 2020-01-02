@@ -3,10 +3,19 @@ import { makeStyles } from '@material-ui/core';
 const backgroundImage = '/images/hydroponics-bg.jpg';
 
 const useStyles = makeStyles(theme => ({
+  root: {
+    position: 'relative',
+    display: 'flex',
+    alignItems: 'center',
+    [theme.breakpoints.up('sm')]: {
+      height: '100vh',
+      minHeight: 500,
+      maxHeight: 2000
+    }
+  },
   container: {
     marginTop: theme.spacing(3),
     marginBottom: theme.spacing(14),
-    position: 'relative',
     display: 'flex',
     flexDirection: 'column',
     alignItems: 'center'
@@ -40,17 +49,17 @@ const useStyles = makeStyles(theme => ({
     display: 'inline-block',
     maxWidth: '100%',
     width: 320
+  },
+  h5: {
+    marginBottom: theme.spacing(4),
+    marginTop: theme.spacing(4),
+    [theme.breakpoints.up('sm')]: {
+      marginTop: theme.spacing(10)
+    }
+  },
+  more: {
+    marginTop: theme.spacing(2)
   }
-  // h5: {
-  //   marginBottom: theme.spacing(4),
-  //   marginTop: theme.spacing(4),
-  //   [theme.breakpoints.up('sm')]: {
-  //     marginTop: theme.spacing(10)
-  //   }
-  // },
-  // more: {
-  //   marginTop: theme.spacing(2)
-  // }
 }));
 
 export default useStyles;

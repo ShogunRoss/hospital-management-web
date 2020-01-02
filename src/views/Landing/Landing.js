@@ -10,7 +10,7 @@ const Landing = () => {
   return (
     <div className={classes.root}>
       <Container className={classes.container}>
-        <Typography color="inherit" align="center" variant="h2">
+        <Typography color="inherit" align="center" variant="h1">
           HOSPITAL FACILITIES MANAGEMENT SYSTEM
         </Typography>
         <Typography color="inherit" align="center" variant="h5">
@@ -28,8 +28,8 @@ const Landing = () => {
         <Typography variant="body2" color="inherit" className={classes.more}>
           Manage your hospital facilities
         </Typography>
-        <div className={classes.backdrop} />
-        <div className={classes.background} />
+        {/* <div className={classes.backdrop} /> */}
+        {/* <div className={classes.background} /> */}
       </Container>
     </div>
   );
