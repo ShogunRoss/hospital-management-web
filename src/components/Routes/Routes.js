@@ -33,8 +33,6 @@ const Routes = () => {
   return (
     <Router history={browserHistory}>
       <Switch>
-        {/* Because we do not have landing page yet */}
-        {/* <Redirect exact from={routes.HOME} to={routes.ADMIN} /> */}
 
         {token && <Redirect exact from={routes.ADMIN} to={routes.DASHBOARD} />}
 
@@ -42,9 +40,9 @@ const Routes = () => {
           <Redirect from={pathname} to={routes.DASHBOARD} />
         )}
 
-        {!token && !authRoutes.includes(pathname) && (
+        {/* {!token && !authRoutes.includes(pathname) && (
           <Redirect from={routes.ADMIN} to={routes.SIGN_IN} />
-        )}
+        )} */}
 
         <Route exact component={LandingView} path={routes.HOME} />
 
@@ -54,7 +52,7 @@ const Routes = () => {
           layout={MinimalLayout}
           path={routes.NOT_FOUND}
         />
-        <RouteWithLayout
+        {/* <RouteWithLayout
           component={SignInView}
           exact
           layout={MinimalLayout}
@@ -71,7 +69,7 @@ const Routes = () => {
           exact
           layout={MinimalLayout}
           path={routes.FORGOT_PASSWORD}
-        />
+        /> */}
         <RouteWithLayout
           component={ConfirmNotificationView}
           layout={MinimalLayout}
@@ -83,7 +81,7 @@ const Routes = () => {
           path={routes.RESET_PASSWORD + '/:passwordToken'}
         />
 
-        <RouteWithLayout
+        {/* <RouteWithLayout
           component={DashboardView}
           exact
           layout={MainLayout}
@@ -112,7 +110,7 @@ const Routes = () => {
           exact
           layout={MainLayout}
           path={routes.SETTINGS}
-        />
+        /> */}
         <Redirect to={routes.NOT_FOUND} />
       </Switch>
     </Router>

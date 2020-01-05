@@ -63,7 +63,7 @@ const Minimal = props => {
         <Grid className={classes.grid} container>
           <Grid className={classes.quoteContainer} item lg={5}>
             <div className={classes.quote}>
-              <div className={classes.quoteInner}>
+              {/* <div className={classes.quoteInner}>
                 <Typography className={classes.quoteText} variant="h1">
                   Hella narwhal Cosby sweater McSweeney's, salvia kitsch before
                   they sold out High Life.
@@ -76,7 +76,7 @@ const Minimal = props => {
                     Manager at inVision
                   </Typography>
                 </div>
-              </div>
+              </div> */}
             </div>
           </Grid>
           <Grid className={classes.content} item lg={7} xs={12}>
