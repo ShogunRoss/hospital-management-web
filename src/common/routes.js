@@ -14,4 +14,6 @@ export const CHANGE_PASSWORD = '/change-password';
 export const CONFIRM_NOTIFICATION = '/confirm';
 export const RESET_PASSWORD = '/reset-password';
 
+export const POLICY = '/policy'
+
 export const NOT_FOUND = '/not-found';

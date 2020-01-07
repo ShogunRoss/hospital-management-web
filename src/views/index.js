@@ -12,3 +12,4 @@ export { default as ForgotPassword } from './ForgotPassword';
 export { default as ConfirmNotification } from './ConfirmNotification';
 export { default as ResetPassword } from './ResetPassword';
 export { default as Landing } from './Landing';
+export { default as Policy } from './Policy';

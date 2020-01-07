@@ -18,7 +18,8 @@ import {
   ForgotPassword as ForgotPasswordView,
   ConfirmNotification as ConfirmNotificationView,
   ResetPassword as ResetPasswordView,
-  Landing as LandingView
+  Landing as LandingView,
+  Policy as PolicyView
 } from 'views';
 import { getAccessToken } from 'utils/accessToken';
 
@@ -45,6 +46,8 @@ const Routes = () => {
         )} */}
 
         <Route exact component={LandingView} path={routes.HOME} />
+
+        <Route exact component={PolicyView} path={routes.POLICY} />
 
         <RouteWithLayout
           component={NotFoundView}
