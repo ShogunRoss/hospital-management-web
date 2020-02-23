@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import validate from 'validate.js';
+import validate from 'src/utils/validateOverride';
 import {
   Button,
   IconButton,
@@ -14,9 +14,9 @@ import {
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
 import useStyles from './signUpStyles';
-import * as routes from 'common/routes';
+import * as routes from 'src/common/routes';
 import { useMutation } from 'react-apollo';
-import { SIGN_UP } from 'utils/graphqlMutations';
+import { SIGN_UP } from 'src/utils/graphqlMutations';
 
 const schema = {
   email: {

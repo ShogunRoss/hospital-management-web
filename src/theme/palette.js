@@ -6,11 +6,12 @@ const black = '#000000';
 export default {
   black,
   white,
+  gradient: 'linear-gradient(90deg, #0AC4BA 0%, #2BDA8E 100%)',
   primary: {
     contrastText: white,
-    dark: colors.blue[900],
-    main: colors.blue['A400'],
-    light: colors.blue['A400']
+    dark: colors.green[900],
+    main: colors.green['A400'],
+    light: colors.green['A400']
   },
   secondary: {
     contrastText: white,

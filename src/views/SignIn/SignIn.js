@@ -1,9 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import validate from 'validate.js';
+import { connect } from 'react-redux';
+
+import validate from 'src/utils/validateOverride';
+import { meActions } from 'src/redux/actions';
 import { useMutation } from 'react-apollo';
 import useStyles from './signInStyles';
+
 import {
   Button,
   TextField,
@@ -12,9 +16,10 @@ import {
   CircularProgress
 } from '@material-ui/core';
 
-import { SIGN_IN } from 'utils/graphqlMutations';
-import * as routes from 'common/routes';
-import { setAccessToken } from 'utils/accessToken';
+import { SIGN_IN } from 'src/utils/graphqlMutations';
+import * as routes from 'src/common/routes';
+import { setAccessToken } from 'src/utils/accessToken';
+import meQuery from 'src/utils/meQuery';
 
 const schema = {
   email: {
@@ -34,7 +39,7 @@ const schema = {
 };
 
 const SignIn = props => {
-  const { history } = props;
+  const { history, updateMe } = props;
 
   const classes = useStyles();
 
@@ -79,11 +84,16 @@ const SignIn = props => {
   const handleSignIn = async event => {
     event.preventDefault();
     await signIn({ variables: { ...formState.values } });
-    if (data && data.signIn) {
-      setAccessToken(data.signIn.accessToken);
-    }
-    history.push(routes.DASHBOARD);
   };
+
+  if (data && data.signIn) {
+    console.log(data);
+    meQuery(data.signIn.accessToken).then(me => {
+      me.accessToken = data.signIn.accessToken;
+      updateMe(me);
+      history.push(routes.DASHBOARD);
+    });
+  }
 
   const hasError = field =>
     formState.touched[field] && formState.errors[field] ? true : false;
@@ -163,4 +173,10 @@ SignIn.propTypes = {
   history: PropTypes.object
 };
 
-export default withRouter(SignIn);
+const mapDispatchToProps = dispatch => ({
+  updateMe: me => {
+    dispatch(meActions.updateMe(me));
+  }
+});
+
+export default withRouter(connect(null, mapDispatchToProps)(SignIn));

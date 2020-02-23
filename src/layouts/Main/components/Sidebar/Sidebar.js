@@ -15,7 +15,7 @@ import DeviceHubIcon from '@material-ui/icons/DeviceHub';
 import EventIcon from '@material-ui/icons/Event';
 
 import { Profile, SidebarNav } from './components';
-import * as routes from 'common/routes';
+import * as routes from 'src/common/routes';
 
 const useStyles = makeStyles(theme => ({
   drawer: {

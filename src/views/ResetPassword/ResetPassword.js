@@ -1,13 +1,13 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import validate from 'validate.js';
+import validate from 'src/utils/validateOverride';
 import { Button, TextField, Typography } from '@material-ui/core';
 
 import useStyles from './resetPasswordStyles';
-import * as routes from 'common/routes';
+import * as routes from 'src/common/routes';
 import { useMutation } from 'react-apollo';
-import { RESET_PASSWORD } from 'utils/graphqlMutations';
+import { RESET_PASSWORD } from 'src/utils/graphqlMutations';
 
 const schema = {
   password: {

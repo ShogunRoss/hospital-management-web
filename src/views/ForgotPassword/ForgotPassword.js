@@ -1,7 +1,7 @@
 import React, { useState, useEffect } from 'react';
 import { withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import validate from 'validate.js';
+import validate from 'src/utils/validateOverride';
 import { useMutation } from 'react-apollo';
 
 import {
@@ -13,10 +13,10 @@ import {
 } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
 
-import { FORGOT_PASSWORD } from 'utils/graphqlMutations';
+import { FORGOT_PASSWORD } from 'src/utils/graphqlMutations';
 import useStyles from './forgotPasswordStyles';
-import * as routes from 'common/routes';
-import AlertDialog from 'components/AlertDialog';
+import * as routes from 'src/common/routes';
+import AlertDialog from 'src/components/AlertDialog';
 
 const schema = {
   email: {
@@ -149,7 +149,7 @@ const ForgotPassword = props => {
             error={hasError('email')}
             fullWidth
             helperText={hasError('email') ? formState.errors.email[0] : null}
-            label="Email Address *"
+            label="Email Address"
             name="email"
             onChange={handleChange}
             type="text"

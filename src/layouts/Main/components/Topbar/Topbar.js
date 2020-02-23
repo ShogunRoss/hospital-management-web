@@ -2,6 +2,8 @@ import React, { useState } from 'react';
 import { Link as RouterLink } from 'react-router-dom';
 import clsx from 'clsx';
 import PropTypes from 'prop-types';
+import { useMutation } from 'react-apollo';
+import { setAccessToken } from 'src/utils/accessToken';
 import { makeStyles } from '@material-ui/styles';
 import {
   AppBar,
@@ -14,10 +16,13 @@ import {
 import MenuIcon from '@material-ui/icons/Menu';
 import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
+import * as routes from 'src/common/routes';
+import { SIGN_OUT } from 'src/utils/graphqlMutations';
 
 const useStyles = makeStyles(theme => ({
   root: {
-    boxShadow: 'none'
+    boxShadow: 'none',
+    background: theme.palette.gradient
   },
   flexGrow: {
     flexGrow: 1
@@ -47,6 +52,16 @@ const Topbar = props => {
 
   const [notifications] = useState([]);
 
+  const [signOut, { client }] = useMutation(SIGN_OUT);
+
+  const handleSignOut = async () => {
+    await signOut();
+    setAccessToken('');
+    await client.resetStore();
+
+    window.location.href = routes.SIGN_IN;
+  };
+
   return (
     <AppBar {...rest} className={clsx(classes.root, className)}>
       <Toolbar>
@@ -70,7 +85,10 @@ const Topbar = props => {
               <NotificationsIcon />
             </Badge>
           </IconButton>
-          <IconButton className={classes.signOutButton} color="inherit">
+          <IconButton
+            className={classes.signOutButton}
+            color="inherit"
+            onClick={handleSignOut}>
             <InputIcon />
           </IconButton>
         </Hidden>

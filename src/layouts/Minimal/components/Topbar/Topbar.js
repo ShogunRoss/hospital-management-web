@@ -4,11 +4,12 @@ import clsx from 'clsx';
 import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { AppBar, Toolbar, Typography } from '@material-ui/core';
-import theme from 'theme';
+import theme from 'src/theme';
 
 const useStyles = makeStyles(() => ({
   root: {
-    boxShadow: 'none'
+    boxShadow: 'none',
+    background: theme.palette.gradient
   },
   boxLogo: {
     display: 'flex',

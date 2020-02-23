@@ -5,8 +5,13 @@ import gql from 'graphql-tag';
 const ME = gql`
   query {
     me {
-      email
       id
+      email
+      role
+      phone
+      firstName
+      lastName
+      avatar
     }
   }
 `;

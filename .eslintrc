@@ -27,6 +27,7 @@
     "react/self-closing-comp": 1,
     "react/sort-comp": 0,
     "no-unused-vars": 1,
+    "no-case-declarations": 0,
     "semi": 0
   },
   "env": {

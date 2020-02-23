@@ -19,7 +19,7 @@ import {
   TablePagination
 } from '@material-ui/core';
 
-import { getInitials } from 'helpers';
+import { getInitials } from 'src/helpers';
 
 const useStyles = makeStyles(theme => ({
   root: {},

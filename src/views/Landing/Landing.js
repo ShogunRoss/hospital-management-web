@@ -3,7 +3,7 @@ import { Container, Typography, Button } from '@material-ui/core';
 import { Link as RouterLink } from 'react-router-dom';
 
 import useStyles from './landingStyles';
-import * as routes from 'common/routes';
+import * as routes from 'src/common/routes';
 
 const Landing = () => {
   const classes = useStyles();

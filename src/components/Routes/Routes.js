@@ -1,10 +1,11 @@
 import React from 'react';
 import { Switch, Redirect, Router, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
+import { connect } from 'react-redux';
 
-import { RouteWithLayout } from 'components';
-import { Main as MainLayout, Minimal as MinimalLayout } from 'layouts';
-import * as routes from 'common/routes';
+import { RouteWithLayout } from 'src/components';
+import { Main as MainLayout, Minimal as MinimalLayout } from 'src/layouts';
+import * as routes from 'src/common/routes';
 
 import {
   Dashboard as DashboardView,
@@ -20,30 +21,26 @@ import {
   ResetPassword as ResetPasswordView,
   Landing as LandingView,
   Policy as PolicyView
-} from 'views';
-import { getAccessToken } from 'utils/accessToken';
+} from 'src/views';
 
 const browserHistory = createBrowserHistory();
 const { pathname } = browserHistory.location;
 
-const Routes = () => {
-  let token = getAccessToken();
-
+const Routes = ({ accessToken }) => {
   const authRoutes = [routes.SIGN_IN, routes.SIGN_UP, routes.FORGOT_PASSWORD];
-
+  console.log(pathname);
   return (
     <Router history={browserHistory}>
       <Switch>
+        {accessToken && (
+          <Redirect exact from={routes.ADMIN} to={routes.DASHBOARD} />
+        )}
 
-        {token && <Redirect exact from={routes.ADMIN} to={routes.DASHBOARD} />}
-
-        {token && authRoutes.includes(pathname) && (
+        {accessToken && authRoutes.includes(pathname) && (
           <Redirect from={pathname} to={routes.DASHBOARD} />
         )}
 
-        {/* {!token && !authRoutes.includes(pathname) && (
-          <Redirect from={routes.ADMIN} to={routes.SIGN_IN} />
-        )} */}
+        {!accessToken && <Redirect from={routes.ADMIN} to={routes.SIGN_IN} />}
 
         <Route exact component={LandingView} path={routes.HOME} />
 
@@ -55,7 +52,7 @@ const Routes = () => {
           layout={MinimalLayout}
           path={routes.NOT_FOUND}
         />
-        {/* <RouteWithLayout
+        <RouteWithLayout
           component={SignInView}
           exact
           layout={MinimalLayout}
@@ -72,7 +69,7 @@ const Routes = () => {
           exact
           layout={MinimalLayout}
           path={routes.FORGOT_PASSWORD}
-        /> */}
+        />
         <RouteWithLayout
           component={ConfirmNotificationView}
           layout={MinimalLayout}
@@ -84,7 +81,7 @@ const Routes = () => {
           path={routes.RESET_PASSWORD + '/:passwordToken'}
         />
 
-        {/* <RouteWithLayout
+        <RouteWithLayout
           component={DashboardView}
           exact
           layout={MainLayout}
@@ -113,11 +110,13 @@ const Routes = () => {
           exact
           layout={MainLayout}
           path={routes.SETTINGS}
-        /> */}
+        />
         <Redirect to={routes.NOT_FOUND} />
       </Switch>
     </Router>
   );
 };
 
-export default Routes;
+const mapStateToProps = state => state.me;
+
+export default connect(mapStateToProps)(Routes);

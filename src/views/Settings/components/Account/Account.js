@@ -12,18 +12,18 @@ import {
   Button
 } from '@material-ui/core';
 import { useMutation } from 'react-apollo';
+import { connect } from 'react-redux';
 
-import { setAccessToken } from 'utils/accessToken';
-import { SIGN_OUT } from 'utils/graphqlMutations';
-import * as routes from 'common/routes';
+import { setAccessToken } from 'src/utils/accessToken';
+import { SIGN_OUT } from 'src/utils/graphqlMutations';
+import * as routes from 'src/common/routes';
+import { meActions } from 'src/redux/actions';
 
 const useStyles = makeStyles(() => ({
   root: {}
 }));
 
-const Account = props => {
-  const { className, history, ...rest } = props;
-
+const Account = ({ className, history, reduxSignOut, ...rest }) => {
   const classes = useStyles();
 
   // const [values, setValues] = useState({
@@ -42,7 +42,7 @@ const Account = props => {
 
   const handleSignOut = async () => {
     await signOut();
-    setAccessToken('');
+    reduxSignOut();
     await client.resetStore();
 
     history.push(routes.SIGN_IN);
@@ -86,8 +86,13 @@ const Account = props => {
 };
 
 Account.propTypes = {
-  className: PropTypes.string,
-  history: PropTypes.object
+  className: PropTypes.string
 };
 
-export default Account;
+const mapDispatchToProps = dispatch => ({
+  reduxSignOut: () => {
+    dispatch(meActions.signOut());
+  }
+});
+
+export default connect(null, mapDispatchToProps)(Account);
