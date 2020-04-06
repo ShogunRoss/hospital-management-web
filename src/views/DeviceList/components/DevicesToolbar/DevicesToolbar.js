@@ -8,8 +8,7 @@ import AddIcon from '@material-ui/icons/Add';
 const useStyles = makeStyles(theme => ({
   root: {
     display: 'flex',
-    flexGrow: 1,
-    justifyContent: 'right',
+    justifyContent: 'flex-end',
     marginBottom: theme.spacing(2)
   }
 }));

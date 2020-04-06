@@ -195,3 +195,14 @@ tspan {
   stroke-width: 0;
   background: none;
 }
+
+tbody tr {
+  transition: transform 0.2s;
+}
+
+tbody tr:hover {
+  cursor: pointer;
+  transform: scale(1.03);
+  background: #ccc;
+  color: #fff;
+}

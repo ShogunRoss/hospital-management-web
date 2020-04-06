@@ -44,6 +44,11 @@ export default (toolbarPaddingNarrow = false) => {
             minHeight: 48
           }
         }
+      },
+      MUIDataTable: {
+        responsiveStacked: {
+          overflowX: 'hidden'
+        }
       }
     }
   });

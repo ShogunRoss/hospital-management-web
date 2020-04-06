@@ -118,7 +118,7 @@ const DeviceList = () => {
     <div className={classes.root}>
       <DevicesToolbar />
       <MaterialTable
-        title={<Typography variant="title">Danh sách thiết bị</Typography>}
+        title={<Typography variant="h4">Danh sách thiết bị</Typography>}
         data={devices}
         columns={columns}
         options={options}

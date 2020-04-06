@@ -5,11 +5,13 @@ import { useQuery } from 'react-apollo';
 // import mockData from './data';
 import { USERS } from 'src/utils/graphqlQueries';
 // import { useSelector } from 'react-redux';
-import { IconButton, Typography } from '@material-ui/core';
+import { IconButton, Typography, Avatar } from '@material-ui/core';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/DeleteOutlined';
 import { MaterialTable } from 'src/components';
 import { UsersToolbar } from './components';
+
+import { getInitials } from 'src/helpers';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -20,6 +22,14 @@ const useStyles = makeStyles(theme => ({
   },
   action: {
     textAlign: 'center'
+  },
+  nameContainer: {
+    display: 'flex',
+    alignItems: 'center'
+  },
+  avatar: {
+    marginRight: theme.spacing(2),
+    backgroundColor: theme.palette.primary.dark
   }
 }));
 
@@ -37,11 +47,27 @@ const UserList = () => {
     }));
   }
 
+  const options = {
+    onRowClick: (rowData, rowMeta) => {
+      console.log({ rowData, rowMeta });
+    }
+  };
+
   const columns = [
     {
       name: 'name',
       label: 'Họ và Tên',
-      options: { filter: false }
+      options: {
+        filter: false,
+        customBodyRender: (value, { rowIndex }) => (
+          <div className={classes.nameContainer}>
+            <Avatar className={classes.avatar} src={users[rowIndex].avatar}>
+              {getInitials(value)}
+            </Avatar>
+            <Typography variant="body1">{value}</Typography>
+          </div>
+        )
+      }
     },
     {
       name: 'employeeId',
@@ -94,9 +120,10 @@ const UserList = () => {
     <div className={classes.root}>
       <UsersToolbar />
       <MaterialTable
-        title={<Typography variant="title">Danh sách người dùng</Typography>}
+        title={<Typography variant="h4">Danh sách người dùng</Typography>}
         data={users}
         columns={columns}
+        options={options}
       />
     </div>
   );
