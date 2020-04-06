@@ -52,17 +52,17 @@ const Sidebar = props => {
       icon: <DashboardIcon />
     },
     {
-      title: 'Users',
+      title: 'Người dùng',
       href: routes.USERS,
       icon: <PeopleIcon />
     },
     {
-      title: 'Devices',
+      title: 'Thiết bị',
       href: routes.DEVICES,
       icon: <DeviceHubIcon />
     },
     {
-      title: 'Events',
+      title: 'Sự kiện',
       href: routes.EVENTS,
       icon: <EventIcon />
     },
@@ -92,7 +92,7 @@ const Sidebar = props => {
     //   icon: <AccountBoxIcon />
     // },
     {
-      title: 'Settings',
+      title: 'Cài đặt',
       href: routes.SETTINGS,
       icon: <SettingsIcon />
     }

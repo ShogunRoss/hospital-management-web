@@ -1,4 +1,5 @@
-import React from 'react';
+import React, { useEffect } from 'react';
+import PropTypes from 'prop-types';
 import { Switch, Redirect, Router, Route } from 'react-router-dom';
 import { createBrowserHistory } from 'history';
 import { connect } from 'react-redux';
@@ -9,7 +10,7 @@ import * as routes from 'src/common/routes';
 
 import {
   Dashboard as DashboardView,
-  ProductList as ProductListView,
+  DeviceList as DeviceListView,
   UserList as UserListView,
   Typography as TypographyView,
   Settings as SettingsView,
@@ -23,14 +24,15 @@ import {
   Policy as PolicyView
 } from 'src/views';
 
-const browserHistory = createBrowserHistory();
-const { pathname } = browserHistory.location;
+export const history = createBrowserHistory();
+const { pathname } = history.location;
 
 const Routes = ({ accessToken }) => {
   const authRoutes = [routes.SIGN_IN, routes.SIGN_UP, routes.FORGOT_PASSWORD];
-  console.log(pathname);
+  // console.log(pathname);
+
   return (
-    <Router history={browserHistory}>
+    <Router history={history}>
       <Switch>
         {accessToken && (
           <Redirect exact from={routes.ADMIN} to={routes.DASHBOARD} />
@@ -94,7 +96,7 @@ const Routes = ({ accessToken }) => {
           path={routes.USERS}
         />
         <RouteWithLayout
-          component={ProductListView}
+          component={DeviceListView}
           exact
           layout={MainLayout}
           path={routes.DEVICES}
@@ -115,6 +117,10 @@ const Routes = ({ accessToken }) => {
       </Switch>
     </Router>
   );
+};
+
+Routes.propTypes = {
+  accessToken: PropTypes.string
 };
 
 const mapStateToProps = state => state.me;

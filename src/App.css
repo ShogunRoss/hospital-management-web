@@ -1,23 +1,12 @@
-body {
-  overflow: overlay;
+/* body::-webkit-scrollbar {
+  width: 0.5rem;
 }
-
-body::-webkit-scrollbar {
-  width: 8px;
-  border-radius: 4px;
-  background: transparent;
-  transition: all 0.3s ease;
+body::-webkit-scrollbar-track {
+  background: #e5e5e5;
 }
-/* body::-webkit-scrollbar:hover {
-  background: #c6c7ca;
-} */
 body::-webkit-scrollbar-thumb {
-  background: transparent;
-  border-radius: 4px;
-}
-body:not(:hover)::-webkit-scrollbar-thumb {
-  background: #777779;
-}
+  background: #2bda8e;
+} */
 
 html * {
   -webkit-font-smoothing: antialiased;
@@ -34,7 +23,7 @@ body {
 
 blockquote footer:before,
 blockquote small:before {
-  content: "\2014 \00A0";
+  content: '\2014 \00A0';
 }
 
 small {
@@ -68,7 +57,7 @@ h5 {
 }
 
 h6 {
-  font-size: 1em;
+  font-size: 0.875em;
   text-transform: uppercase;
   font-weight: 500;
 }
@@ -89,20 +78,9 @@ h3,
 h4,
 h5,
 h6 {
-  font-family: "Roboto", "Helvetica", "Arial", sans-serif;
+  font-family: 'Roboto', 'Helvetica', 'Arial', sans-serif;
   font-weight: 300;
   line-height: 1.5em;
-}
-
-a {
-  color: #9c27b0;
-  text-decoration: none;
-}
-
-a:hover,
-a:focus {
-  color: #89229b;
-  text-decoration: none;
 }
 
 legend {
@@ -124,11 +102,11 @@ button:active,
 button:focus,
 button:hover,
 button::-moz-focus-inner,
-input[type="reset"]::-moz-focus-inner,
-input[type="button"]::-moz-focus-inner,
-input[type="submit"]::-moz-focus-inner,
+input[type='reset']::-moz-focus-inner,
+input[type='button']::-moz-focus-inner,
+input[type='submit']::-moz-focus-inner,
 select::-moz-focus-inner,
-input[type="file"] > input[type="button"]::-moz-focus-inner {
+input[type='file'] > input[type='button']::-moz-focus-inner {
   outline: 0 !important;
 }
 
@@ -195,8 +173,25 @@ footer ul li a:hover {
     top: 0;
     left: auto;
     right: 260px;
-    content: "";
+    content: '';
     z-index: 9999;
     overflow-x: hidden;
   }
+}
+
+tspan {
+  font-size: 0.875rem;
+  color: #637381;
+  opacity: 0.85;
+}
+
+.recharts-rectangle {
+  stroke-width: 5;
+  stroke-linejoin: round;
+  stroke: rgb(136, 132, 216);
+}
+
+.recharts-tooltip-cursor {
+  stroke-width: 0;
+  background: none;
 }

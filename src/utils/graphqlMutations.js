@@ -29,7 +29,7 @@ const CONFIRM_EMAIL = gql`
 //Used for sending an forgot password url to recipient's email
 //Get back true when success
 const FORGOT_PASSWORD = gql`
-  mutation forgotPassword($email: String!) {
+  mutation ForgotPassword($email: String!) {
     forgotPassword(email: $email)
   }
 `;
@@ -37,8 +37,8 @@ const FORGOT_PASSWORD = gql`
 //Used for change password when signed in
 //Get back true when success
 const CHANGE_PASSWORD = gql`
-  mutation ChangePassword($newPassword: String!) {
-    changePassword(newPassword: $newPassword)
+  mutation ChangePassword($oldPassword: String!, $newPassword: String!) {
+    changePassword(oldPassword: $oldPassword, newPassword: $newPassword)
   }
 `;
 
@@ -58,6 +58,20 @@ const SIGN_OUT = gql`
   }
 `;
 
+const AVATAR_UPLOAD = gql`
+  mutation AvatarUpload($file: Upload!) {
+    avatarUpload(file: $file)
+  }
+`;
+
+const UPDATE_USER = gql`
+  mutation UpdateUser($userInput: UserInput!) {
+    updateUser(userInput: $userInput) {
+      id
+    }
+  }
+`;
+
 export {
   SIGN_IN,
   SIGN_UP,
@@ -65,5 +79,7 @@ export {
   FORGOT_PASSWORD,
   CHANGE_PASSWORD,
   RESET_PASSWORD,
-  SIGN_OUT
+  SIGN_OUT,
+  AVATAR_UPLOAD,
+  UPDATE_USER
 };

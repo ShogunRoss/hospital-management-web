@@ -18,7 +18,6 @@ export default (state = initialState, action) => {
       } else {
         newState.avatar = state.avatar;
       }
-      console.log(newState);
       return newState;
     case 'SIGN_OUT': {
       return initialState;

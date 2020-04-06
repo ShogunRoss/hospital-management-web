@@ -37,11 +37,11 @@ export default {
     lineHeight: '20px'
   },
   h6: {
-    color: palette.text.primary,
-    fontWeight: 500,
-    fontSize: '14px',
-    letterSpacing: '-0.05px',
-    lineHeight: '20px'
+    color: palette.text.secondary,
+    fontWeight: 700,
+    fontSize: '12px',
+    letterSpacing: '-0.04px',
+    lineHeight: '18px'
   },
   subtitle1: {
     color: palette.text.primary,

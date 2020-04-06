@@ -1,8 +1,8 @@
-export { default as Budget } from './Budget';
-export { default as LatestOrders } from './LatestOrders';
-export { default as LatestProducts } from './LatestProducts';
-export { default as LatestSales } from './LatestSales';
-export { default as TasksProgress } from './TasksProgress';
-export { default as TotalProfit } from './TotalProfit';
-export { default as TotalUsers } from './TotalUsers';
-export { default as UsersByDevice } from './UsersByDevice';
+export { default as Users } from './Users';
+export { default as Devices } from './Devices';
+export { default as ActiveEvents } from './ActiveEvents';
+export { default as MaintenanceDevices } from './MaintenanceDevices';
+export { default as ReportEvents } from './ReportEvents';
+export { default as LiquidatedDevices } from './LiquidatedDevices';
+export { default as UsageChart } from './UsageChart';
+export { default as LatestEventsList } from './LatestEventsList';

@@ -18,6 +18,7 @@ import NotificationsIcon from '@material-ui/icons/NotificationsOutlined';
 import InputIcon from '@material-ui/icons/Input';
 import * as routes from 'src/common/routes';
 import { SIGN_OUT } from 'src/utils/graphqlMutations';
+// import { history } from 'src/components/Routes/Routes';
 
 const useStyles = makeStyles(theme => ({
   root: {

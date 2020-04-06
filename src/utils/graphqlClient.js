@@ -4,11 +4,19 @@ import { createUploadLink } from 'apollo-upload-client';
 import { TokenRefreshLink } from 'apollo-link-token-refresh';
 import { InMemoryCache } from 'apollo-cache-inmemory';
 import jwtDecode from 'jwt-decode';
+// import { WebSocketLink } from 'apollo-link-ws';
 
 import store from 'src/redux/store';
 import meQuery from 'src/utils/meQuery';
 import { meActions } from 'src/redux/actions';
 import { URL } from 'src/common/config';
+
+// const wsLink = new WebSocketLink({
+//   uri: `${URL}/graphql`,
+//   options: {
+//     reconnect: true
+//   }
+// });
 
 const httpLink = createUploadLink({
   uri: `${URL}/graphql`,
@@ -67,7 +75,6 @@ const refreshTokenLink = new TokenRefreshLink({
     });
   },
   handleFetch: async accessToken => {
-    console.log('client: ', accessToken);
     const me = await meQuery(accessToken);
     me.accessToken = accessToken;
     store.dispatch(meActions.updateMe(me));
@@ -79,14 +86,14 @@ const refreshTokenLink = new TokenRefreshLink({
 });
 
 const defaultOptions = {
-  watchQuery: {
-    fetchPolicy: 'no-cache',
-    errorPolicy: 'all'
-  },
-  query: {
-    fetchPolicy: 'no-cache',
-    errorPolicy: 'all'
-  }
+  // watchQuery: {
+  //   fetchPolicy: 'no-cache',
+  //   errorPolicy: 'all'
+  // },
+  // query: {
+  //   fetchPolicy: 'no-cache',
+  //   errorPolicy: 'all'
+  // }
 };
 
 const link = ApolloLink.from([refreshTokenLink, authLink, httpLink]);

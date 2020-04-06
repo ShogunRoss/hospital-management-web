@@ -22,12 +22,12 @@ const Footer = props => {
         <Link component="a" target="_blank">
           IAA Co., Ltd
         </Link>
-        . 2019
+        . 2020
       </Typography>
-      <Typography variant="caption">
+      {/* <Typography variant="caption">
         Created with love for the environment. By designers and developers who
         love to work together in offices!
-      </Typography>
+      </Typography> */}
     </div>
   );
 };

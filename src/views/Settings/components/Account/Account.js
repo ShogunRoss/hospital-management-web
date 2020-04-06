@@ -13,8 +13,6 @@ import {
 } from '@material-ui/core';
 import { useMutation } from 'react-apollo';
 import { connect } from 'react-redux';
-
-import { setAccessToken } from 'src/utils/accessToken';
 import { SIGN_OUT } from 'src/utils/graphqlMutations';
 import * as routes from 'src/common/routes';
 import { meActions } from 'src/redux/actions';
@@ -86,7 +84,9 @@ const Account = ({ className, history, reduxSignOut, ...rest }) => {
 };
 
 Account.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  history: PropTypes.object,
+  reduxSignOut: PropTypes.func
 };
 
 const mapDispatchToProps = dispatch => ({

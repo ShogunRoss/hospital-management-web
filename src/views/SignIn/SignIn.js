@@ -18,7 +18,6 @@ import {
 
 import { SIGN_IN } from 'src/utils/graphqlMutations';
 import * as routes from 'src/common/routes';
-import { setAccessToken } from 'src/utils/accessToken';
 import meQuery from 'src/utils/meQuery';
 
 const schema = {

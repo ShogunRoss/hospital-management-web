@@ -2,16 +2,26 @@ import { colors } from '@material-ui/core';
 
 const white = '#FFFFFF';
 const black = '#000000';
+const purple = '#C40AA6';
+const blue = '#3B95FF';
+const orange = '#FF993B';
+const yellow = '#FFEE58';
+const red = '#D82626';
 
 export default {
   black,
   white,
+  purple,
+  blue,
+  orange,
+  yellow,
+  red,
   gradient: 'linear-gradient(90deg, #0AC4BA 0%, #2BDA8E 100%)',
   primary: {
     contrastText: white,
-    dark: colors.green[900],
-    main: colors.green['A400'],
-    light: colors.green['A400']
+    dark: '#0AC4BA',
+    main: '#47B881',
+    light: '#D3FFEC'
   },
   secondary: {
     contrastText: white,
