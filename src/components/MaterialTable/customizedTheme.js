@@ -28,6 +28,12 @@ export default (toolbarPaddingNarrow = false) => {
           },
           '&:nth-of-type(even)': {
             backgroundColor: palette.primary.light
+          },
+          transition: 'background-color 250ms',
+          '&$hover': {
+            '&:hover': {
+              cursor: 'pointer'
+            }
           }
         }
       },

@@ -173,9 +173,9 @@ const SignUp = props => {
               <Link
                 color="primary"
                 component={RouterLink}
-                to="#"
+                to={routes.POLICY}
                 underline="always"
-                variant="h6">
+                variant="h5">
                 Terms and Conditions
               </Link>
             </Typography>
@@ -195,7 +195,7 @@ const SignUp = props => {
           </Button>
           <Typography color="textSecondary" variant="body1">
             Have an account?{' '}
-            <Link component={RouterLink} to="/sign-in" variant="h6">
+            <Link component={RouterLink} to="/sign-in" variant="h5">
               Sign in
             </Link>
           </Typography>

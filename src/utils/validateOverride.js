@@ -6,8 +6,7 @@ const validators = {
       return options.message || 'phải được xác nhận';
     }
     return true;
-  },
-  notEqual: (values, options, attributes) => {}
+  }
 };
 
 validate.validators = {

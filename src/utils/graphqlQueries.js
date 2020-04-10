@@ -53,6 +53,7 @@ export const DEVICES = gql`
         startUseState
         originalPrice
         faculty
+        qrcode
       }
       pageInfo {
         endCursor
@@ -141,6 +142,23 @@ export const DEVICE_INFO = gql`
       faculty
       availability
       activeState
+    }
+  }
+`;
+
+export const ACTIVE_EVENTS_BY_USER = gql`
+  query ActiveEventsByUser($userId: ID!) {
+    activeEventsByUser(userId: $userId) {
+      data {
+        id
+        actionType
+        createdAt
+        usedInterval
+        device {
+          title
+          faculty
+        }
+      }
     }
   }
 `;

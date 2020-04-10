@@ -12,9 +12,9 @@ import {
   MaintenanceDevices,
   ReportEvents,
   LiquidatedDevices,
-  UsageChart,
-  LatestEventsList
+  UsageChart
 } from './components';
+import { LatestEventsList } from 'src/components';
 import {
   usersActions,
   devicesActions,

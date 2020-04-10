@@ -8,17 +8,29 @@ body::-webkit-scrollbar-thumb {
   background: #2bda8e;
 } */
 
-html * {
+#root {
+  height: 100%;
+}
+
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+}
+
+html {
+  height: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
 }
 body {
-  background-color: #eeeeee;
+  background-color: #e5e5e5;
   color: #3c4858;
   margin: 0;
   font-family: Roboto, Helvetica, Arial, sans-serif;
   font-weight: 300;
   line-height: 1.5em;
+  height: 100%;
 }
 
 blockquote footer:before,
@@ -62,11 +74,6 @@ h6 {
   font-weight: 500;
 }
 
-body {
-  background-color: #eeeeee;
-  color: #3c4858;
-}
-
 blockquote p {
   font-style: italic;
 }
@@ -94,6 +101,10 @@ legend {
 
 *:focus {
   outline: 0;
+}
+
+a {
+  text-decoration: none;
 }
 
 a:focus,
@@ -194,15 +205,4 @@ tspan {
 .recharts-tooltip-cursor {
   stroke-width: 0;
   background: none;
-}
-
-tbody tr {
-  transition: transform 0.2s;
-}
-
-tbody tr:hover {
-  cursor: pointer;
-  transform: scale(1.03);
-  background: #ccc;
-  color: #fff;
 }

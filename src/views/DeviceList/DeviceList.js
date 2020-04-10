@@ -21,6 +21,9 @@ const useStyles = makeStyles(theme => ({
     display: 'flex',
     alignItems: 'center',
     justifyContent: 'flex-end'
+  },
+  action: {
+    textAlign: 'center'
   }
 }));
 
@@ -90,28 +93,28 @@ const DeviceList = () => {
       name: 'faculty',
       label: 'Bộ phận',
       options: { filter: true }
-    },
-    {
-      name: 'action',
-      label: 'Thao tác',
-      options: {
-        sort: false,
-        filter: false,
-        viewColumns: false,
-        setCellHeaderProps: () => ({ style: { textAlign: 'center' } }),
-        setCellProps: () => ({ style: { padding: 0 } }),
-        customBodyRender: () => (
-          <div className={classes.action}>
-            <IconButton>
-              <EditIcon color="primary" />
-            </IconButton>
-            <IconButton>
-              <DeleteIcon color="error" />
-            </IconButton>
-          </div>
-        )
-      }
     }
+    // {
+    //   name: 'action',
+    //   label: 'Thao tác',
+    //   options: {
+    //     sort: false,
+    //     filter: false,
+    //     viewColumns: false,
+    //     setCellHeaderProps: () => ({ style: { textAlign: 'center' } }),
+    //     setCellProps: () => ({ style: { padding: 0 } }),
+    //     customBodyRender: () => (
+    //       <div className={classes.action}>
+    //         <IconButton>
+    //           <EditIcon color="primary" />
+    //         </IconButton>
+    //         <IconButton>
+    //           <DeleteIcon color="error" />
+    //         </IconButton>
+    //       </div>
+    //     )
+    //   }
+    // }
   ];
 
   return (

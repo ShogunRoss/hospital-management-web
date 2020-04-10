@@ -2,7 +2,6 @@ import React, { useState, useEffect } from 'react';
 import { connect } from 'react-redux';
 
 import 'react-perfect-scrollbar/dist/css/styles.css';
-import './assets/scss/index.scss';
 import Routes from './components/Routes';
 import { URL } from './common/config';
 import meQuery from 'src/utils/meQuery';

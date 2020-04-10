@@ -62,7 +62,11 @@ const Profile = props => {
 };
 
 Profile.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  lastName: PropTypes.string,
+  firstName: PropTypes.string,
+  avatar: PropTypes.object,
+  role: PropTypes.string
 };
 
 const mapStateToProps = state => state.me;

@@ -61,11 +61,11 @@ const Sidebar = props => {
       href: routes.DEVICES,
       icon: <DeviceHubIcon />
     },
-    {
-      title: 'Sự kiện',
-      href: routes.EVENTS,
-      icon: <EventIcon />
-    },
+    // {
+    //   title: 'Sự kiện',
+    //   href: routes.EVENTS,
+    //   icon: <EventIcon />
+    // },
     // {
     //   title: 'Products',
     //   href: '/products',

@@ -86,7 +86,6 @@ const SignIn = props => {
   };
 
   if (data && data.signIn) {
-    console.log(data);
     meQuery(data.signIn.accessToken).then(me => {
       me.accessToken = data.signIn.accessToken;
       updateMe(me);
@@ -151,13 +150,13 @@ const SignIn = props => {
               <Link
                 component={RouterLink}
                 to={routes.FORGOT_PASSWORD}
-                variant="h6">
+                variant="h5">
                 Forgot Password?
               </Link>
             </Typography>
             <Typography color="textSecondary" variant="body1">
               {"Don't have an account? "}
-              <Link component={RouterLink} to={routes.SIGN_UP} variant="h6">
+              <Link component={RouterLink} to={routes.SIGN_UP} variant="h5">
                 Sign up
               </Link>
             </Typography>

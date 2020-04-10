@@ -14,13 +14,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const UsersToolbar = props => {
-  const { className, ...rest } = props;
+  const { className, onAddNewUser, ...rest } = props;
 
   const classes = useStyles();
 
   return (
     <div {...rest} className={clsx(classes.root, className)}>
-      <Button color="primary" variant="contained" startIcon={<AddIcon />}>
+      <Button
+        onClick={onAddNewUser}
+        color="primary"
+        variant="contained"
+        startIcon={<AddIcon />}>
         Thêm người dùng
       </Button>
     </div>
@@ -28,7 +32,8 @@ const UsersToolbar = props => {
 };
 
 UsersToolbar.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  onAddNewUser: PropTypes.func
 };
 
 export default UsersToolbar;

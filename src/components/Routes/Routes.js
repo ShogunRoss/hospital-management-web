@@ -12,7 +12,7 @@ import {
   Dashboard as DashboardView,
   DeviceList as DeviceListView,
   UserList as UserListView,
-  Typography as TypographyView,
+  // Typography as TypographyView,
   Settings as SettingsView,
   SignUp as SignUpView,
   SignIn as SignInView,
@@ -101,12 +101,12 @@ const Routes = ({ accessToken }) => {
           layout={MainLayout}
           path={routes.DEVICES}
         />
-        <RouteWithLayout
+        {/* <RouteWithLayout
           component={TypographyView}
           exact
           layout={MainLayout}
           path={routes.EVENTS}
-        />
+        /> */}
         <RouteWithLayout
           component={SettingsView}
           exact

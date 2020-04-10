@@ -33,10 +33,7 @@ const UpgradePlan = props => {
   const classes = useStyles();
 
   return (
-    <div
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
+    <div {...rest} className={clsx(classes.root, className)}>
       <div className={classes.media}>
         <img
           alt="Upgrade to PRO"
@@ -44,17 +41,10 @@ const UpgradePlan = props => {
         />
       </div>
       <div className={classes.content}>
-        <Typography
-          align="center"
-          gutterBottom
-          variant="h6"
-        >
+        <Typography align="center" gutterBottom variant="h5">
           Upgrade to PRO
         </Typography>
-        <Typography
-          align="center"
-          variant="body2"
-        >
+        <Typography align="center" variant="body2">
           Upgrade to Devias Kit PRO and get even more components
         </Typography>
       </div>
@@ -63,8 +53,7 @@ const UpgradePlan = props => {
           color="primary"
           component="a"
           href="https://devias.io/products/devias-kit-pro"
-          variant="contained"
-        >
+          variant="contained">
           Upgrade
         </Button>
       </div>
