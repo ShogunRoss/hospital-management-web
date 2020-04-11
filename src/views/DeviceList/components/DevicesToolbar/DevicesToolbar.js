@@ -14,13 +14,17 @@ const useStyles = makeStyles(theme => ({
 }));
 
 const ProductsToolbar = props => {
-  const { className, ...rest } = props;
+  const { className, onAddNewDevice, ...rest } = props;
 
   const classes = useStyles();
 
   return (
     <div {...rest} className={clsx(classes.root, className)}>
-      <Button color="primary" variant="contained" startIcon={<AddIcon />}>
+      <Button
+        onClick={onAddNewDevice}
+        color="primary"
+        variant="contained"
+        startIcon={<AddIcon />}>
         Thêm thiết bị
       </Button>
     </div>
@@ -28,7 +32,8 @@ const ProductsToolbar = props => {
 };
 
 ProductsToolbar.propTypes = {
-  className: PropTypes.string
+  className: PropTypes.string,
+  onAddNewDevice: PropTypes.func
 };
 
 export default ProductsToolbar;

@@ -7,7 +7,7 @@ import { useQuery } from 'react-apollo';
 import { MaterialTable } from 'src/components';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/DeleteOutlined';
-import { DevicesToolbar } from './components';
+import { DevicesToolbar, DevicesDialog } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -30,6 +30,9 @@ const useStyles = makeStyles(theme => ({
 /* eslint-disable react/no-multi-comp, react/display-name */
 const DeviceList = () => {
   const classes = useStyles();
+  const [selectedDevice, setSelectedDevice] = useState(null);
+  const [openDialog, setOpenDialog] = useState(false);
+  const [dialogType, setDialogType] = useState(null);
 
   const { data, loading } = useQuery(DEVICES);
   // console.log(data);
@@ -45,7 +48,8 @@ const DeviceList = () => {
   }
 
   const options = {
-    viewColumns: true
+    viewColumns: true,
+    onRowClick: (_, rowMeta) => setSelectedDevice(devices[rowMeta.rowIndex])
   };
 
   const columns = [
@@ -117,9 +121,19 @@ const DeviceList = () => {
     // }
   ];
 
+  const handleAddNewDevice = () => {
+    setDialogType('addNewUserForm');
+    setOpenDialog(true);
+  };
+
   return (
     <div className={classes.root}>
-      <DevicesToolbar />
+      <DevicesDialog
+        open={openDialog}
+        dialogType={dialogType}
+        onCloseDialog={() => setOpenDialog(false)}
+      />
+      <DevicesToolbar onAddNewDevice={handleAddNewDevice} />
       <MaterialTable
         title={<Typography variant="h4">Danh sách thiết bị</Typography>}
         data={devices}
