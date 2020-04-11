@@ -22,19 +22,19 @@ const addNewDeviceForm = [
     label: 'Năm sản xuất',
     name: 'manufacturedYear',
     type: 'year',
-    isRequired: true
+    isRequired: false
   },
   {
     label: 'Thời điểm đưa vào sử dụng',
     name: 'startUseTime',
     type: 'date',
-    isRequired: true
+    isRequired: false
   },
   {
     label: 'Tình trạng đưa vào sử dụng',
     name: 'startUseState',
-    type: 'checkbox',
-    isRequired: true
+    type: 'select',
+    isRequired: false
   },
   {
     label: 'Giá thành',

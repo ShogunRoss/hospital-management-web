@@ -1,7 +1,13 @@
 import React, { Fragment, useEffect, useState } from 'react';
 import PropTypes from 'prop-types';
 import validate from 'src/utils/validateOverride';
-import { TextField } from '@material-ui/core';
+import {
+  TextField,
+  InputLabel,
+  Select,
+  MenuItem,
+  FormControl
+} from '@material-ui/core';
 import useStyles from './dynamicFormStyles';
 import {
   KeyboardDatePicker,
@@ -35,7 +41,11 @@ const DynamicForm = props => {
         equality: field.name === 'confirmPassword' && 'password'
       }
     };
-    if (field.type === 'year' || field.type === 'date') {
+    if (
+      field.type === 'year' ||
+      field.type === 'date' ||
+      field.type === 'select'
+    ) {
       delete result[field.name].length;
     }
     return result;
@@ -50,6 +60,8 @@ const DynamicForm = props => {
           ? field.defaultValue
           : field.type === 'date' || field.type === 'year'
           ? Date.now()
+          : field.type === 'select'
+          ? true
           : ''
       }),
       {}
@@ -61,6 +73,7 @@ const DynamicForm = props => {
   useEffect(() => {
     const errors = validate(formState.values, schema);
     const isValid = errors ? false : true;
+    console.log(errors);
     isValid !== formState.isValid && onFormIsValid && onFormIsValid(isValid);
     setFormState(formState => ({
       ...formState,
@@ -69,7 +82,6 @@ const DynamicForm = props => {
     }));
 
     formRef.current = formState.values;
-    console.log(formState.values);
   }, [formState.values]);
 
   const handleChange = event => {
@@ -153,7 +165,9 @@ const DynamicForm = props => {
                   field.type === 'year' ? 'Năm' : 'Ngày'
                 } không đúng định dạng`}
                 required={field.isRequired}
-                error={this.error || hasError(field.name)}
+                helperText={
+                  hasError(field.name) ? formState.errors[field.name][0] : null
+                }
                 // TextFieldComponent={props => {
                 //   console.log(props);
                 //   return (
@@ -165,16 +179,39 @@ const DynamicForm = props => {
                 //           ? formState.errors[field.name][0]
                 //           : null
                 //       }
-                //       error={hasError(field.name)}
+                //       error={props.error || hasError(field.name)}
                 //     />
                 //   );
                 // }}
               />
             </MuiPickersUtilsProvider>
           );
+        if (field.type === 'select')
+          return (
+            <FormControl
+              variant="outlined"
+              key={field.name}
+              fullWidth
+              margin="normal"
+              // className={classes.formControl}>
+            >
+              <InputLabel id="select-label">{field.label}</InputLabel>
+              <Select
+                labelId="select-label"
+                id="select"
+                name={field.name}
+                value={formState.values[field.name]}
+                onChange={handleChange}
+                label={field.label}>
+                <MenuItem value={Boolean(1)}>Mới</MenuItem>
+                <MenuItem value={Boolean(0)}>Cũ</MenuItem>
+              </Select>
+            </FormControl>
+          );
+
         return (
           <TextField
-            inputProps={{ className: classes.input }}
+            inputProps={{ className: classes.input, type: field.type }}
             autoFocus={autoFocus && index === 0}
             key={field.name}
             margin="normal"
