@@ -1,11 +1,9 @@
-import React, { useState, useEffect } from 'react';
+import React, { useState, useEffect, useRef } from 'react';
 import { Link as RouterLink, withRouter } from 'react-router-dom';
 import PropTypes from 'prop-types';
-import validate from 'src/utils/validateOverride';
 import {
   Button,
   IconButton,
-  TextField,
   Link,
   FormHelperText,
   Checkbox,
@@ -17,74 +15,64 @@ import useStyles from './signUpStyles';
 import * as routes from 'src/common/routes';
 import { useMutation } from 'react-apollo';
 import { SIGN_UP } from 'src/utils/graphqlMutations';
-
-const schema = {
-  email: {
-    presence: { allowEmpty: false, message: 'is required' },
-    email: true,
-    length: {
-      maximum: 64
-    }
-  },
-  password: {
-    presence: { allowEmpty: false, message: 'is required' },
-    length: {
-      minimum: 6,
-      maximum: 42
-    }
-  },
-  confirmPassword: {
-    equality: 'password',
-    presence: { allowEmpty: false, message: 'is required' }
-  },
-  policy: {
-    presence: { allowEmpty: false, message: 'is required' },
-    checked: true
-  }
-};
+import { DynamicForm } from 'src/components';
 
 const SignUp = props => {
   const { history } = props;
 
   const classes = useStyles();
-
-  const [formState, setFormState] = useState({
-    isValid: false,
-    values: {},
-    touched: {},
-    errors: {}
+  const [formIsValid, setFormIsValid] = useState(false);
+  const [checkBoxState, setCheckBoxState] = useState({
+    checked: false,
+    touched: false
   });
+  const formRef = useRef(null);
 
   const [signUp] = useMutation(SIGN_UP);
 
-  useEffect(() => {
-    const errors = validate(formState.values, schema);
-
-    setFormState(formState => ({
-      ...formState,
-      isValid: errors ? false : true,
-      errors: errors || {}
-    }));
-  }, [formState.values]);
-
-  const handleChange = event => {
-    event.persist();
-
-    setFormState(formState => ({
-      ...formState,
-      values: {
-        ...formState.values,
-        [event.target.name]:
-          event.target.type === 'checkbox'
-            ? event.target.checked
-            : event.target.value
-      },
-      touched: {
-        ...formState.touched,
-        [event.target.name]: true
-      }
-    }));
-  };
+  const signUpForm = [
+    {
+      label: 'Email',
+      name: 'email',
+      type: 'email',
+      isRequired: true
+    },
+    {
+      label: 'Mật khẩu',
+      name: 'password',
+      type: 'password',
+      isRequired: true
+    },
+    {
+      label: 'Xác nhận mật khẩu',
+      name: 'confirmPassword',
+      type: 'password',
+      isRequired: true
+    },
+    {
+      label: 'Mã số nhân viên',
+      name: 'employeeId',
+      type: 'text',
+      isRequired: true
+    },
+    {
+      label: 'Họ và Tên lót',
+      name: 'lastName',
+      type: 'text',
+      isRequired: true
+    },
+    {
+      label: 'Tên',
+      name: 'firstName',
+      type: 'text',
+      isRequired: true
+    },
+    {
+      label: 'Số điện thoại',
+      name: 'phone',
+      type: 'number'
+    }
+  ];
 
   const handleBack = () => {
     history.push(routes.SIGN_IN);
@@ -92,13 +80,10 @@ const SignUp = props => {
 
   const handleSignUp = async event => {
     event.preventDefault();
-    const { email, password } = formState.values;
-    await signUp({ variables: { email, password } });
+    // const { email, password } = formState.values;
+    // await signUp({ variables: { email, password } });
     history.push(routes.HOME);
   };
-
-  const hasError = field =>
-    formState.touched[field] && formState.errors[field] ? true : false;
 
   return (
     <div className={classes.content}>
@@ -110,93 +95,64 @@ const SignUp = props => {
       <div className={classes.contentBody}>
         <form className={classes.form} onSubmit={handleSignUp}>
           <Typography className={classes.title} variant="h2">
-            Create new account
+            Tạo tài khoản mới
           </Typography>
           <Typography color="textSecondary" gutterBottom>
-            Use your email to create new account
+            Sử dụng địa chỉ email của bạn để tạo tài khoản mới
           </Typography>
-          <TextField
-            className={classes.textField}
-            error={hasError('email')}
-            fullWidth
-            helperText={hasError('email') ? formState.errors.email[0] : null}
-            label="Email address"
-            name="email"
-            onChange={handleChange}
-            type="text"
-            value={formState.values.email || ''}
-            variant="outlined"
-          />
-          <TextField
-            className={classes.textField}
-            error={hasError('password')}
-            fullWidth
-            helperText={
-              hasError('password') ? formState.errors.password[0] : null
-            }
-            label="Password"
-            name="password"
-            onChange={handleChange}
-            type="password"
-            value={formState.values.password || ''}
-            variant="outlined"
-          />
-          <TextField
-            className={classes.textField}
-            error={hasError('confirmPassword')}
-            fullWidth
-            helperText={
-              hasError('confirmPassword')
-                ? formState.errors.confirmPassword[0]
-                : null
-            }
-            label="Confirm Password"
-            name="confirmPassword"
-            onChange={handleChange}
-            type="password"
-            value={formState.values.confirmPassword || ''}
-            variant="outlined"
+          <DynamicForm
+            autoFocus
+            formRef={formRef}
+            formData={signUpForm}
+            onFormIsValid={setFormIsValid}
           />
           <div className={classes.policy}>
             <Checkbox
-              checked={formState.values.policy || false}
+              checked={checkBoxState.checked || false}
               className={classes.policyCheckbox}
               color="primary"
               name="policy"
-              onChange={handleChange}
+              onChange={() =>
+                setCheckBoxState({
+                  touched: true,
+                  checked: !checkBoxState.checked
+                })
+              }
             />
             <Typography
               className={classes.policyText}
               color="textSecondary"
               variant="body1">
-              I have read the{' '}
+              Tôi đã đọc{' '}
               <Link
                 color="primary"
                 component={RouterLink}
                 to={routes.POLICY}
                 underline="always"
                 variant="h5">
-                Terms and Conditions
+                Điều khoản dịch vụ
               </Link>
             </Typography>
           </div>
-          {hasError('policy') && (
-            <FormHelperText error>{formState.errors.policy[0]}</FormHelperText>
+          {checkBoxState.touched && !checkBoxState.checked && (
+            <FormHelperText error>
+              Phải xác nhận điều khoản dịch vụ
+            </FormHelperText>
           )}
           <Button
             className={classes.signUpButton}
             color="primary"
-            disabled={!formState.isValid}
+            disabled={!formIsValid || !checkBoxState.checked}
             fullWidth
             size="large"
             type="submit"
             variant="contained">
-            Sign up now
+            Đăng ký
           </Button>
           <Typography color="textSecondary" variant="body1">
-            Have an account?{' '}
+            Đã có tài khoản?{' '}
             <Link component={RouterLink} to="/sign-in" variant="h5">
-              Sign in
+              Đăng nhập
             </Link>
           </Typography>
         </form>

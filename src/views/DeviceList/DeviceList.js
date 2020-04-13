@@ -1,13 +1,13 @@
-import React, { useState } from 'react';
+import React, { useState, Fragment } from 'react';
 import { makeStyles } from '@material-ui/styles';
-import { Typography, IconButton } from '@material-ui/core';
+import { Typography, IconButton, SvgIcon } from '@material-ui/core';
 
 import { DEVICES } from 'src/utils/graphqlQueries';
 import { useQuery } from 'react-apollo';
 import { MaterialTable } from 'src/components';
 import EditIcon from '@material-ui/icons/EditOutlined';
 import DeleteIcon from '@material-ui/icons/DeleteOutlined';
-import { DevicesToolbar, DevicesDialog } from './components';
+import { DevicesToolbar, DevicesDialog, DeviceProfile } from './components';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -31,8 +31,11 @@ const useStyles = makeStyles(theme => ({
 const DeviceList = () => {
   const classes = useStyles();
   const [selectedDevice, setSelectedDevice] = useState(null);
-  const [openDialog, setOpenDialog] = useState(false);
-  const [dialogType, setDialogType] = useState(null);
+  const [dialogState, setDialogState] = useState({
+    type: '',
+    open: false,
+    value: ''
+  });
 
   const { data, loading } = useQuery(DEVICES);
   // console.log(data);
@@ -49,7 +52,8 @@ const DeviceList = () => {
 
   const options = {
     viewColumns: true,
-    onRowClick: (_, rowMeta) => setSelectedDevice(devices[rowMeta.rowIndex])
+    onRowClick: (rowData, rowMeta) =>
+      setSelectedDevice(devices[rowMeta.dataIndex])
   };
 
   const columns = [
@@ -97,7 +101,7 @@ const DeviceList = () => {
       name: 'faculty',
       label: 'Bộ phận',
       options: { filter: true }
-    }
+    },
     // {
     //   name: 'action',
     //   label: 'Thao tác',
@@ -119,27 +123,76 @@ const DeviceList = () => {
     //     )
     //   }
     // }
+    {
+      name: 'qrcode',
+      label: 'QR Code',
+      options: {
+        sort: false,
+        filter: false,
+        setCellHeaderProps: () => ({ style: { textAlign: 'center' } }),
+        setCellProps: () => ({ style: { padding: 0 } }),
+        customBodyRender: value => (
+          <div className={classes.action}>
+            <IconButton onClick={event => handleQRViewClick(event, value)}>
+              <SvgIcon color="primary">
+                <path
+                  fill="currentColor"
+                  d="M3,11H5V13H3V11M11,5H13V9H11V5M9,11H13V15H11V13H9V11M15,11H17V13H19V11H21V13H19V15H21V19H19V21H17V19H13V21H11V17H15V15H17V13H15V11M19,19V15H17V19H19M15,3H21V9H15V3M17,5V7H19V5H17M3,3H9V9H3V3M5,5V7H7V5H5M3,15H9V21H3V15M5,17V19H7V17H5Z"
+                />
+              </SvgIcon>
+            </IconButton>
+          </div>
+        )
+      }
+    }
   ];
 
-  const handleAddNewDevice = () => {
-    setDialogType('addNewUserForm');
-    setOpenDialog(true);
+  const handleQRViewClick = (event, value) => {
+    event.stopPropagation();
+    setDialogState({
+      open: true,
+      type: 'viewQrCode',
+      value: value
+    });
   };
+
+  const handleAddNewDevice = () => {
+    setDialogState(dialogState => ({
+      ...dialogState,
+      open: true,
+      type: 'addNewDeviceForm'
+    }));
+  };
+
+  const handleDialogClose = () =>
+    setDialogState(dialogState => ({
+      ...dialogState,
+      open: false,
+      value: ''
+    }));
 
   return (
     <div className={classes.root}>
-      <DevicesDialog
-        open={openDialog}
-        dialogType={dialogType}
-        onCloseDialog={() => setOpenDialog(false)}
-      />
-      <DevicesToolbar onAddNewDevice={handleAddNewDevice} />
-      <MaterialTable
-        title={<Typography variant="h4">Danh sách thiết bị</Typography>}
-        data={devices}
-        columns={columns}
-        options={options}
-      />
+      {!selectedDevice ? (
+        <Fragment>
+          <DevicesDialog
+            dialogState={dialogState}
+            onCloseDialog={handleDialogClose}
+          />
+          <DevicesToolbar onAddNewDevice={handleAddNewDevice} />
+          <MaterialTable
+            title={<Typography variant="h4">Danh sách thiết bị</Typography>}
+            data={devices}
+            columns={columns}
+            options={options}
+          />
+        </Fragment>
+      ) : (
+        <DeviceProfile
+          profile={selectedDevice}
+          onGoBack={() => setSelectedDevice(null)}
+        />
+      )}
     </div>
   );
 };

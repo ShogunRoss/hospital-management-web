@@ -17,8 +17,19 @@ import { SIGN_OUT } from 'src/utils/graphqlMutations';
 import * as routes from 'src/common/routes';
 import { meActions } from 'src/redux/actions';
 
-const useStyles = makeStyles(() => ({
-  root: {}
+const useStyles = makeStyles(theme => ({
+  root: {},
+  actionButtons: {
+    justifyContent: 'space-between',
+    padding: theme.spacing(1, 2)
+  },
+  signOutButton: {
+    backgroundColor: theme.palette.error.main,
+    color: theme.palette.error.contrastText,
+    '&:hover': {
+      backgroundColor: theme.palette.error.light
+    }
+  }
 }));
 
 const Account = ({ className, history, reduxSignOut, ...rest }) => {
@@ -49,7 +60,7 @@ const Account = ({ className, history, reduxSignOut, ...rest }) => {
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <form>
-        <CardHeader title="Account" subheader="Manage Account" />
+        <CardHeader title="Tài khoản" subheader="Quản lý tài khoản" />
         <Divider />
         {/* <CardContent>
           <TextField
@@ -73,9 +84,13 @@ const Account = ({ className, history, reduxSignOut, ...rest }) => {
           />
         </CardContent>
         <Divider /> */}
-        <CardActions>
-          <Button color="secondary" variant="outlined" onClick={handleSignOut}>
-            SIGN OUT
+        <CardActions className={classes.actionButtons}>
+          <Button
+            className={classes.signOutButton}
+            color="secondary"
+            variant="contained"
+            onClick={handleSignOut}>
+            Đăng xuất
           </Button>
         </CardActions>
       </form>

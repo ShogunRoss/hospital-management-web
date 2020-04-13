@@ -2,28 +2,27 @@ import React from 'react';
 import PropTypes from 'prop-types';
 import { IconButton, Grid } from '@material-ui/core';
 import ArrowBackIcon from '@material-ui/icons/ArrowBack';
-import useStyles from './userProfileStyles';
-import UserBio from '../UserBio';
-import EditInfo from '../EditInfo';
+import useStyles from './deviceProfileStyles';
+import EditDevice from '../EditDevice';
 import { LatestEventsList } from 'src/components';
-import { ACTIVE_EVENTS_BY_USER } from 'src/utils/graphqlQueries';
+import { ACTIVE_EVENTS_BY_DEVICE } from 'src/utils/graphqlQueries';
 import { useQuery } from 'react-apollo';
 
-const UserProfile = props => {
+const DeviceProfile = props => {
   const { onGoBack, profile } = props;
   const classes = useStyles();
 
   const { data: activeEvents, loading: activeEventsLoading } = useQuery(
-    ACTIVE_EVENTS_BY_USER,
+    ACTIVE_EVENTS_BY_DEVICE,
     {
-      variables: { userId: profile.id }
+      variables: { deviceId: profile.id }
     }
   );
   const loading = activeEventsLoading;
   let activeEventsData = [];
   if (!loading) {
-    if (activeEvents && activeEvents.activeEventsByUser) {
-      activeEventsData = activeEvents.activeEventsByUser.data;
+    if (activeEvents && activeEvents.activeEventsByDevice) {
+      activeEventsData = activeEvents.activeEventsByDevice.data;
     }
   }
 
@@ -33,25 +32,20 @@ const UserProfile = props => {
         <ArrowBackIcon />
       </IconButton>
       <Grid container spacing={4}>
-        <Grid item container md={5} xs={12} spacing={4}>
-          <Grid item xs={12}>
-            <UserBio profile={profile} />
-          </Grid>
-          <Grid item xs={12}>
-            <EditInfo profile={profile} />
-          </Grid>
+        <Grid item md={5} xs={12}>
+          <EditDevice profile={profile} />
         </Grid>
         <Grid item md={7} xs={12}>
-          <LatestEventsList hidden="creator" activeEvents={activeEventsData} />
+          <LatestEventsList hidden="device" activeEvents={activeEventsData} />
         </Grid>
       </Grid>
     </div>
   );
 };
 
-UserProfile.propTypes = {
+DeviceProfile.propTypes = {
   profile: PropTypes.object,
   onGoBack: PropTypes.func
 };
 
-export default UserProfile;
+export default DeviceProfile;

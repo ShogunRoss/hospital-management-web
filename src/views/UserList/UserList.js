@@ -50,7 +50,7 @@ const UserList = () => {
   }
 
   const options = {
-    onRowClick: (_, rowMeta) => setSelectedUser(users[rowMeta.rowIndex])
+    onRowClick: (_, rowMeta) => setSelectedUser(users[rowMeta.dataIndex])
   };
 
   const columns = [

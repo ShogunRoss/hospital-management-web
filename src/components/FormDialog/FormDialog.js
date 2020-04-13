@@ -24,7 +24,8 @@ const FormDialog = props => {
     handleContinue,
     description,
     isLoading,
-    error
+    error,
+    ...rest
   } = props;
 
   const classes = useStyles();
@@ -38,17 +39,29 @@ const FormDialog = props => {
   const _handleContinue = event => {
     event.preventDefault();
     delete formRef.current.confirmPassword;
+    formData.forEach(field => {
+      if (field.type === 'year' || field.type === 'date') {
+        formRef.current[field.name] = !formRef.current[field.name]
+          ? null
+          : field.type === 'year'
+          ? new Date(formRef.current[field.name]).getFullYear()
+          : new Date(formRef.current[field.name]);
+      }
+    });
+
     handleContinue && handleContinue(formRef.current);
     // setOpen(false);
   };
 
   return (
     <Dialog
+      {...rest}
+      onClose={handleCancel}
       open={open}
       aria-labelledby="form-dialog-title"
       aria-describedby="form-dialog-description">
       <DialogTitle id="form-dialog-title">{title}</DialogTitle>
-      <form onSubmit={handleContinue}>
+      <form onSubmit={handleContinue} autoComplete="off">
         <DialogContent className={classes.content}>
           <DialogContentText id="form-dialog-description">
             {description}

@@ -9,19 +9,12 @@ import {
   FormControl
 } from '@material-ui/core';
 import useStyles from './dynamicFormStyles';
-import {
-  KeyboardDatePicker,
-  MuiPickersUtilsProvider
-} from '@material-ui/pickers';
-import DateFnsUtils from '@date-io/date-fns';
-import viLocale from 'date-fns/locale/vi';
+import DateField from '../DateField';
 
 const DynamicForm = props => {
   const { formRef, formData, onFormIsValid, autoFocus, error } = props;
 
   const classes = useStyles();
-  const maxDate = new Date('1/1/2100');
-  const minDate = new Date('1/1/1970');
   const schema = formData.reduce((obj, field) => {
     const result = {
       ...obj,
@@ -33,10 +26,14 @@ const DynamicForm = props => {
         email: field.name === 'email',
         length: {
           maximum: 128,
-          minimum:
-            field.name === 'password' || field.name === 'confirmPassword'
-              ? 3
-              : 0
+          minimum: ['oldPassword', 'password', 'confirmPassword'].includes(
+            field.name
+          )
+            ? 3
+            : 0,
+          tooShort: `^${field.label} phải có tối thiểu %{count} ký tự`,
+          tooLong: `^${field.label} phải có tối đa %{count} ký tự`,
+          notValid: `^${field.label} không hợp lệ`
         },
         equality: field.name === 'confirmPassword' && 'password'
       }
@@ -56,13 +53,14 @@ const DynamicForm = props => {
     values: formData.reduce(
       (obj, field) => ({
         ...obj,
-        [field.name]: field.defaultValue
-          ? field.defaultValue
-          : field.type === 'date' || field.type === 'year'
-          ? Date.now()
-          : field.type === 'select'
-          ? true
-          : ''
+        [field.name]:
+          field.defaultValue !== undefined
+            ? field.defaultValue
+            : field.type === 'date' || field.type === 'year'
+            ? Date.now()
+            : field.type === 'select'
+            ? true
+            : ''
       }),
       {}
     ),
@@ -73,7 +71,6 @@ const DynamicForm = props => {
   useEffect(() => {
     const errors = validate(formState.values, schema);
     const isValid = errors ? false : true;
-    console.log(errors);
     isValid !== formState.isValid && onFormIsValid && onFormIsValid(isValid);
     setFormState(formState => ({
       ...formState,
@@ -113,78 +110,25 @@ const DynamicForm = props => {
     }));
   };
 
-  // const handleDateError = (error, name) => {
-  // console.log({ error });
-  // if (error) {
-  //   setFormState(formState => ({
-  //     ...formState,
-  //     errors: { ...formState.errors, [name]: [error] }
-  //   }));
-  // }
-  // };
-
   const hasError = field =>
     formState.touched[field] && formState.errors[field] ? true : false;
+
   return (
     <Fragment>
       {formData.map((field, index) => {
-        if (field.type === 'checkbox') return <div key={field.name} />;
+        // if (field.type === 'checkbox') return <div key={field.name} />;
         if (field.type === 'year' || field.type === 'date')
           return (
-            <MuiPickersUtilsProvider
+            <DateField
               key={field.name}
-              utils={DateFnsUtils}
-              locale={viLocale}>
-              <KeyboardDatePicker
-                label={field.label}
-                value={formState.values[field.name]}
-                format={field.type === 'year' ? 'yyyy' : 'dd/MM/yyyy'}
-                name={field.name}
-                openTo={field.type}
-                views={[field.type]}
-                onChange={date => handleDateChange(date, field.name)}
-                autoOk
-                orientation="landscape"
-                inputVariant="outlined"
-                variant="inline"
-                fullWidth
-                margin="normal"
-                maxDate={maxDate}
-                minDate={minDate}
-                maxDateMessage={`${field.label} phải nhỏ hơn ${
-                  field.type === 'year'
-                    ? maxDate.getFullYear()
-                    : maxDate.toLocaleDateString()
-                }`}
-                minDateMessage={`${field.label} phải lớn hơn ${
-                  field.type === 'year'
-                    ? minDate.getFullYear()
-                    : minDate.toLocaleDateString()
-                }`}
-                invalidDateMessage={`${
-                  field.type === 'year' ? 'Năm' : 'Ngày'
-                } không đúng định dạng`}
-                required={field.isRequired}
-                helperText={
-                  hasError(field.name) ? formState.errors[field.name][0] : null
-                }
-                // TextFieldComponent={props => {
-                //   console.log(props);
-                //   return (
-                //     <TextField
-                //       {...props}
-                //       required={field.isRequired}
-                //       helperText={
-                //         hasError(field.name)
-                //           ? formState.errors[field.name][0]
-                //           : null
-                //       }
-                //       error={props.error || hasError(field.name)}
-                //     />
-                //   );
-                // }}
-              />
-            </MuiPickersUtilsProvider>
+              onChange={date => handleDateChange(date, field.name)}
+              field={field}
+              value={formState.values[field.name]}
+              helperText={
+                hasError(field.name) ? formState.errors[field.name][0] : null
+              }
+              error={hasError(field.name)}
+            />
           );
         if (field.type === 'select')
           return (

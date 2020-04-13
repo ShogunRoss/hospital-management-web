@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState, useRef } from 'react';
 import PropTypes from 'prop-types';
 import clsx from 'clsx';
 import { makeStyles } from '@material-ui/styles';
@@ -11,67 +11,60 @@ import {
   Button,
   TextField
 } from '@material-ui/core';
+import { DynamicForm } from 'src/components';
 
-const useStyles = makeStyles(() => ({
-  root: {}
+const useStyles = makeStyles(theme => ({
+  root: {},
+  actionButtons: {
+    justifyContent: 'space-between',
+    padding: theme.spacing(1, 2)
+  }
 }));
 
 const Password = props => {
   const { className, ...rest } = props;
 
   const classes = useStyles();
+  const formRef = useRef(null);
 
-  const [values, setValues] = useState({
-    password: '',
-    confirm: ''
-  });
-
-  const handleChange = event => {
-    setValues({
-      ...values,
-      [event.target.name]: event.target.value
-    });
+  const onChangePassword = event => {
+    event.preventDefault();
+    console.log(formRef.current);
   };
 
+  const changePasswordForm = [
+    {
+      label: 'Mật khẩu cũ',
+      name: 'oldPassword',
+      type: 'password',
+      isRequired: true
+    },
+    {
+      label: 'Mật khẩu mới',
+      name: 'password',
+      type: 'password',
+      isRequired: true
+    },
+    {
+      label: 'Xác nhận mật khẩu mới',
+      name: 'confirmPassword',
+      type: 'password',
+      isRequired: true
+    }
+  ];
+
   return (
-    <Card
-      {...rest}
-      className={clsx(classes.root, className)}
-    >
-      <form>
-        <CardHeader
-          subheader="Update password"
-          title="Password"
-        />
+    <Card {...rest} className={clsx(classes.root, className)}>
+      <form autoComplete="off" onSubmit={onChangePassword}>
+        <CardHeader subheader="Thay đổi mật khẩu" title="Mật khẩu" />
         <Divider />
         <CardContent>
-          <TextField
-            fullWidth
-            label="Password"
-            name="password"
-            onChange={handleChange}
-            type="password"
-            value={values.password}
-            variant="outlined"
-          />
-          <TextField
-            fullWidth
-            label="Confirm password"
-            name="confirm"
-            onChange={handleChange}
-            style={{ marginTop: '1rem' }}
-            type="password"
-            value={values.confirm}
-            variant="outlined"
-          />
+          <DynamicForm formRef={formRef} formData={changePasswordForm} />
         </CardContent>
         <Divider />
-        <CardActions>
-          <Button
-            color="primary"
-            variant="outlined"
-          >
-            Update
+        <CardActions className={classes.actionButtons}>
+          <Button color="primary" variant="contained">
+            Thay đổi
           </Button>
         </CardActions>
       </form>

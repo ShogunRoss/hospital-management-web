@@ -32,6 +32,8 @@ const Profile = props => {
     firstName,
     avatar,
     role,
+    employeeId,
+    createdAt,
     accessToken,
     dispatch,
     ...rest

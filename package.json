@@ -24,6 +24,8 @@
     "graphql-tag": "^2.10.1",
     "history": "^4.10.1",
     "jwt-decode": "^2.2.0",
+    "lodash": "^4.17.15",
+    "material-ui-image": "^3.2.3",
     "moment": "^2.24.0",
     "mui-datatables": "^2.14.0",
     "prop-types": "^15.7.2",

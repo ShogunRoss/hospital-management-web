@@ -22,6 +22,7 @@ const useStyles = makeStyles(theme => ({
   },
   bioInfo: {
     width: '75%',
+    minHeight: 100,
     padding: theme.spacing(1)
   },
   avatar: {
@@ -31,7 +32,7 @@ const useStyles = makeStyles(theme => ({
     width: 100
   },
   progress: {
-    marginTop: theme.spacing(2)
+    margin: theme.spacing(2, 1, 0)
   },
   uploadButton: {
     marginRight: theme.spacing(2)

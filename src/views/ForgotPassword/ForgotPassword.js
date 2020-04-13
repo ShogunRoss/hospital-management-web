@@ -97,8 +97,9 @@ const ForgotPassword = props => {
   const handleOnCompleted = () => {
     setAlertState({
       open: true,
-      title: 'Success',
-      content: 'Reset password email have been sent sucessfully.',
+      title: 'Thành công',
+      content:
+        'Một email dùng để đặt lại mật khẩu đã được gửi đến hộp thư của bạn. Vui lòng kiểm tra hộp thư và làm theo hướng dẫn!',
       handleContinue: () => {
         history.push(routes.HOME);
       }
@@ -108,9 +109,9 @@ const ForgotPassword = props => {
   const handleOnError = () => {
     setAlertState({
       open: true,
-      title: 'Error',
+      title: 'Không thành công',
       content:
-        'Reset password email have not been sent. Because your email address is not registerd.',
+        'Đặt lại mật khẩu không thành công vì địa chỉ email bạn nhập vào chưa được dùng để đăng ký tài khoản',
       handleContinue: () => {
         history.push(routes.SIGN_UP);
       },
@@ -121,7 +122,7 @@ const ForgotPassword = props => {
           isValid: true
         }));
       },
-      continueText: 'Sign Up'
+      continueText: 'Đăng ký ngay'
     });
   };
 
@@ -142,14 +143,14 @@ const ForgotPassword = props => {
             handleResetPassword(event, sendForgotPasswordEmail)
           }>
           <Typography className={classes.title} variant="h2">
-            Forgot Password
+            Đặt lại mật khẩu
           </Typography>
           <TextField
             className={classes.textField}
             error={hasError('email')}
             fullWidth
             helperText={hasError('email') ? formState.errors.email[0] : null}
-            label="Email Address"
+            label="Email"
             name="email"
             onChange={handleChange}
             type="text"
@@ -166,7 +167,7 @@ const ForgotPassword = props => {
               size="large"
               type="submit"
               variant="contained">
-              Reset Password
+              Xác nhận
             </Button>
             {loading && (
               <CircularProgress size={24} className={classes.buttonProgress} />

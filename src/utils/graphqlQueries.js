@@ -12,6 +12,8 @@ export const ME = gql`
       firstName
       lastName
       avatar
+      employeeId
+      createdAt
     }
   }
 `;

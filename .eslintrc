@@ -5,15 +5,9 @@
     "jsx-quotes": 1,
     "react/forbid-prop-types": 0,
     "react/jsx-boolean-value": 1,
-    "react/jsx-first-prop-new-line": [
-      1,
-      "multiline"
-    ],
+    "react/jsx-first-prop-new-line": [1, "multiline"],
     "react/jsx-curly-spacing": 1,
-    "react/jsx-indent-props": [
-      2,
-      2
-    ],
+    "react/jsx-indent-props": [2, 2],
     "react/jsx-no-duplicate-props": 1,
     "react/jsx-no-literals": 0,
     "react/jsx-no-undef": 1,
@@ -31,6 +25,7 @@
     "react/react-in-jsx-scope": 1,
     "react/self-closing-comp": 1,
     "react/sort-comp": 0,
+    "react/display-name": 0,
     "no-unused-vars": 1,
     "no-case-declarations": 0,
     "semi": 0
@@ -44,9 +39,7 @@
     "plugin:prettier/recommended",
     "plugin:react/recommended"
   ],
-  "plugins": [
-    "react"
-  ],
+  "plugins": ["react"],
   "settings": {
     "react": {
       "version": "detect"

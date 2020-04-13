@@ -1,6 +1,8 @@
 import React from 'react';
 import PropTypes from 'prop-types';
-import { FormDialog } from 'src/components';
+import { FormDialog, AlertDialog } from 'src/components';
+import _ from 'lodash';
+import Image from 'material-ui-image';
 import { localizeError } from 'src/helpers';
 
 const addNewDeviceForm = [
@@ -49,26 +51,55 @@ const addNewDeviceForm = [
     isRequired: true
   }
 ];
+const areEqual = (prevProps, nextProps) => _.isEqual(prevProps, nextProps);
 
-const DevicesDialog = props => {
-  const { open, dialogType, onCloseDialog } = props;
-
+/* eslint-disable react/no-multi-comp */
+const DevicesDialog = React.memo(props => {
+  const { dialogState, onCloseDialog } = props;
+  const { open, type, value } = dialogState;
   const handleCreateNewDevice = async deviceInfo => {
     console.log(deviceInfo);
   };
 
+  const onDownloadQrCode = () => {
+    fetch(value).then(response => {
+      response.blob().then(blob => {
+        let url = window.URL.createObjectURL(blob);
+        let a = document.createElement('a');
+        a.href = url;
+        a.download = `${value.split('/').pop()}`;
+        a.click();
+      });
+    });
+  };
+
   const switchDialog = dialogType => {
     switch (dialogType) {
-      case 'addNewUserForm':
+      case 'addNewDeviceForm':
         return (
           <FormDialog
             open={open}
             handleContinue={handleCreateNewDevice}
             handleCancel={onCloseDialog}
             title={'Thêm thiết bị'}
+            continueText={'Thực hiện'}
+            cancelText={'Bỏ qua'}
             formData={addNewDeviceForm}
+            disableBackdropClick
             // error={localizeError(error)}
             // isLoading={loading}
+          />
+        );
+      case 'viewQrCode':
+        return (
+          <AlertDialog
+            open={open}
+            handleCancel={onCloseDialog}
+            handleContinue={onDownloadQrCode}
+            title={'Mã QR'}
+            continueText={'Tải xuống'}
+            cancelText={'Quay lại'}
+            content={<Image src={value} />}
           />
         );
       default:
@@ -76,12 +107,11 @@ const DevicesDialog = props => {
     }
   };
 
-  return switchDialog(dialogType);
-};
+  return switchDialog(type);
+}, areEqual);
 
 DevicesDialog.propTypes = {
-  open: PropTypes.bool,
-  dialogType: PropTypes.string,
+  dialogState: PropTypes.object,
   onCloseDialog: PropTypes.func
 };
 

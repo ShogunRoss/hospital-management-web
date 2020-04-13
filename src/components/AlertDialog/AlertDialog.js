@@ -6,36 +6,47 @@ import DialogActions from '@material-ui/core/DialogActions';
 import DialogContent from '@material-ui/core/DialogContent';
 import DialogContentText from '@material-ui/core/DialogContentText';
 import DialogTitle from '@material-ui/core/DialogTitle';
+import { makeStyles } from '@material-ui/styles';
+
+const useStyles = makeStyles(theme => ({
+  content: {
+    minWidth: 300
+  }
+}));
 
 const AlertDialog = props => {
   const {
     open,
     title,
+    contentText,
     content,
     cancelText,
     handleCancel,
     continueText,
-    handleContinue
+    handleContinue,
+    ...rest
   } = props;
+
+  const classes = useStyles();
+
   return (
     <Dialog
+      {...rest}
+      onClose={handleCancel}
       open={open}
-      disableBackdropClick
-      disableEscapeKeyDown
       aria-labelledby="alert-dialog-title"
       aria-describedby="alert-dialog-description">
       <DialogTitle id="alert-dialog-title">{title}</DialogTitle>
-      <DialogContent>
-        <DialogContentText id="alert-dialog-description">
-          {content}
-        </DialogContentText>
+      <DialogContent className={classes.content}>
+        {contentText && (
+          <DialogContentText id="alert-dialog-description">
+            {contentText}
+          </DialogContentText>
+        )}
+        {content}
       </DialogContent>
       <DialogActions>
-        {handleCancel && (
-          <Button onClick={handleCancel} color="primary">
-            {cancelText}
-          </Button>
-        )}
+        {handleCancel && <Button onClick={handleCancel}>{cancelText}</Button>}
         {handleContinue && (
           <Button onClick={handleContinue} color="primary" autoFocus>
             {continueText}
@@ -48,7 +59,8 @@ const AlertDialog = props => {
 
 AlertDialog.propTypes = {
   cancelText: PropTypes.string,
-  content: PropTypes.string,
+  contentText: PropTypes.string,
+  content: PropTypes.node,
   continueText: PropTypes.string,
   handleCancel: PropTypes.func,
   handleContinue: PropTypes.func,

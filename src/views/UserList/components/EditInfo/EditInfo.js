@@ -27,11 +27,10 @@ const useStyles = makeStyles(theme => ({
   }
 }));
 
-const InfoEdit = props => {
+const EditInfo = props => {
   const { className, profile, ...rest } = props;
   const classes = useStyles();
   const formRef = useRef(null);
-
   const editUserForm = [
     {
       label: 'Mã số nhân viên',
@@ -90,9 +89,9 @@ const InfoEdit = props => {
   );
 };
 
-InfoEdit.propTypes = {
+EditInfo.propTypes = {
   className: PropTypes.string,
   profile: PropTypes.object
 };
 
-export default InfoEdit;
+export default EditInfo;

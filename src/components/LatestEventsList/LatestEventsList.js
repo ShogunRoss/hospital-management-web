@@ -99,8 +99,6 @@ const LatestEventsList = props => {
     )
   }));
 
-  console.log(data);
-
   return (
     <Card {...rest} className={clsx(classes.root, className)}>
       <CardContent classes={{ root: classes.root }}>
