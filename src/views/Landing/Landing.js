@@ -10,14 +10,15 @@ const Landing = () => {
   return (
     <div className={classes.root}>
       <Container className={classes.container}>
-        <Typography color="inherit" align="center" variant="h1">
-          HOSPITAL FACILITIES MANAGEMENT SYSTEM
+        <Typography className={classes.title} align="center" variant="h1">
+          HỆ THỐNG QUẢN LÝ THIẾT BỊ VẬT TƯ BỆNH VIỆN
         </Typography>
-        <Typography color="inherit" align="center" variant="h5">
-          Enjoy our platform to help you manage your hospital facilities
+        <Typography className={classes.subTitle} align="center" variant="h5">
+          Trải nghiệm một nền tảng giúp việc quản lý thiết bị vật tư trong bệnh
+          viện của bạn một cách dễ dàng hơn
         </Typography>
         <Button
-          color="secondary"
+          color="primary"
           variant="contained"
           size="large"
           className={classes.button}
@@ -25,11 +26,11 @@ const Landing = () => {
           to={routes.ADMIN}>
           Dashboard
         </Button>
-        <Typography variant="body2" color="inherit" className={classes.more}>
+        {/* <Typography variant="body2" color="inherit" className={classes.more}>
           Manage your hospital facilities
-        </Typography>
-        {/* <div className={classes.backdrop} /> */}
-        {/* <div className={classes.background} /> */}
+        </Typography> */}
+        <div className={classes.backdrop} />
+        <div className={classes.background} />
       </Container>
     </div>
   );

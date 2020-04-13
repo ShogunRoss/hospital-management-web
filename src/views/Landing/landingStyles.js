@@ -1,6 +1,6 @@
 import { makeStyles } from '@material-ui/core';
 
-const backgroundImage = '/images/hydroponics-bg.jpg';
+const backgroundImage = '/images/undraw_medicine_b1ol.svg';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -28,7 +28,7 @@ const useStyles = makeStyles(theme => ({
     right: 0,
     top: 0,
     bottom: 0,
-    backgroundSize: 'cover',
+    backgroundSize: 'contain',
     backgroundRepeat: 'no-repeat',
     zIndex: -2
   },
@@ -39,7 +39,7 @@ const useStyles = makeStyles(theme => ({
     top: 0,
     bottom: 0,
     backgroundColor: theme.palette.common.black,
-    opacity: 0.5,
+    opacity: 0.4,
     zIndex: -1
   },
   button: {
@@ -59,6 +59,14 @@ const useStyles = makeStyles(theme => ({
   },
   more: {
     marginTop: theme.spacing(2)
+  },
+  title: {
+    color: theme.palette.primary.light,
+    marginBottom: theme.spacing(2)
+  },
+  subTitle: {
+    color: theme.palette.text.primary,
+    marginBottom: theme.spacing(2)
   }
 }));
 
