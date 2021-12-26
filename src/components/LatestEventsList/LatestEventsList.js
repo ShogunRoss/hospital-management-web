@@ -76,7 +76,7 @@ const LatestEventsList = props => {
     }
   ];
 
-  const data = activeEvents.map(event => ({
+  const data = activeEvents?.map(event => ({
     createdAt: hidden
       ? new Date(event.createdAt).toLocaleString()
       : new Date(event.createdAt).toLocaleTimeString(),

@@ -44,9 +44,11 @@ const FormDialog = props => {
         formRef.current[field.name] = !formRef.current[field.name]
           ? null
           : field.type === 'year'
-          ? new Date(formRef.current[field.name]).getFullYear()
+          ? new Date(formRef.current[field.name]).getFullYear().toString()
           : new Date(formRef.current[field.name]);
       }
+      if (field.type === 'number')
+        formRef.current[field.name] = parseFloat(formRef.current[field.name]);
     });
 
     handleContinue && handleContinue(formRef.current);

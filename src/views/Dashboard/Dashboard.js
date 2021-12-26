@@ -35,23 +35,26 @@ const Dashboard = () => {
   const { data: activeEventsData, loading: activeEventsLoading } = useQuery(
     ACTIVE_EVENTS
   );
+  console.log(devicesData);
   const loading = usersLoading || devicesLoading || activeEventsLoading;
 
   if (loading) {
     return null;
   }
 
-  const reportEventsNumber = activeEventsData.activeEvents.data.filter(
-    event => event.reported
-  ).length;
+  const reportEventsNumber =
+    activeEventsData?.activeEvents?.data.filter(event => event.reported)
+      .length || 0;
 
-  const maintainedDevicesNumber = devicesData.devices.data.filter(
-    device => device.avaibility === 'maintaining'
-  ).length;
+  const maintainedDevicesNumber =
+    devicesData?.devices?.data.filter(
+      device => device.avaibility === 'maintaining'
+    ).length || 0;
 
-  const liquidatedDevicesNumber = devicesData.devices.data.filter(
-    device => device.avaibility === 'liquidated'
-  ).length;
+  const liquidatedDevicesNumber =
+    devicesData?.devices?.data.filter(
+      device => device.avaibility === 'liquidated'
+    ).length || 0;
 
   return (
     <div className={classes.root}>
@@ -63,7 +66,7 @@ const Dashboard = () => {
             </Grid>
             <Grid item lg={4} md={4} xs={12}>
               <ActiveEvents
-                eventNumber={activeEventsData.activeEvents.totalCount}
+                eventNumber={activeEventsData?.activeEvents?.totalCount || 0}
               />
             </Grid>
             <Grid item lg={4} md={4} xs={12}>
@@ -75,7 +78,7 @@ const Dashboard = () => {
             <Grid item lg={4} md={4} xs={12}>
               <Devices
                 deviceNumber={
-                  devicesData.devices.totalCount -
+                  devicesData?.devices?.totalCount -
                   maintainedDevicesNumber -
                   liquidatedDevicesNumber
                 }
@@ -97,7 +100,9 @@ const Dashboard = () => {
         </Grid>
 
         <Grid item lg={5} md={5} sm={12} xs={12}>
-          <LatestEventsList activeEvents={activeEventsData.activeEvents.data} />
+          <LatestEventsList
+            activeEvents={activeEventsData?.activeEvents?.data}
+          />
         </Grid>
       </Grid>
     </div>

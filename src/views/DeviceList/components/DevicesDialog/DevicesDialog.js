@@ -4,6 +4,8 @@ import { FormDialog, AlertDialog } from 'src/components';
 import _ from 'lodash';
 import Image from 'material-ui-image';
 import { localizeError } from 'src/helpers';
+import { useMutation } from 'react-apollo';
+import { ADD_DEVICE } from 'src/utils/graphqlMutations';
 
 const addNewDeviceForm = [
   { label: 'Tên thiết bị', name: 'title', type: 'text', isRequired: true },
@@ -57,8 +59,12 @@ const areEqual = (prevProps, nextProps) => _.isEqual(prevProps, nextProps);
 const DevicesDialog = React.memo(props => {
   const { dialogState, onCloseDialog } = props;
   const { open, type, value } = dialogState;
+  const [addDevice, { data }] = useMutation(ADD_DEVICE);
+
   const handleCreateNewDevice = async deviceInfo => {
-    console.log(deviceInfo);
+    // console.log(deviceInfo);
+    await addDevice({ variables: { deviceInput: deviceInfo } });
+    onCloseDialog();
   };
 
   const onDownloadQrCode = () => {

@@ -72,6 +72,14 @@ const UPDATE_USER = gql`
   }
 `;
 
+const ADD_DEVICE = gql`
+  mutation AddDevice($deviceInput: DeviceInput!) {
+    addDevice(deviceInput: $deviceInput) {
+      id
+    }
+  }
+`;
+
 export {
   SIGN_IN,
   SIGN_UP,
@@ -81,5 +89,6 @@ export {
   RESET_PASSWORD,
   SIGN_OUT,
   AVATAR_UPLOAD,
-  UPDATE_USER
+  UPDATE_USER,
+  ADD_DEVICE
 };

@@ -41,7 +41,7 @@ const DeviceList = () => {
   // console.log(data);
   let devices = [];
   if (!loading) {
-    devices = data.devices.data.map(device => ({
+    devices = data?.devices?.data?.map(device => ({
       ...device,
       startUseState: device.startUseState ? 'Mới' : 'Cũ',
       startUseTime: device.startUseTime
