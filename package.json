@@ -2,7 +2,7 @@
   "name": "hospital-management-web",
   "author": "Long Nguyen Cong",
   "email": "nguyenconglong95@gmail.com",
-  "homepage": "https://laurance-nguyen.github.io/hospital-management-web/",
+  "homepage": "https://hospital-management-web-2022.herokuapp.com/",
   "version": "0.1.0",
   "main": "index.js",
   "private": true,
