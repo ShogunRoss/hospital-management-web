@@ -1,6 +1,6 @@
 self.__precacheManifest = (self.__precacheManifest || []).concat([
   {
-    "revision": "4b8bac7ea59ff37ecd44c8686cd2b411",
+    "revision": "f42798c4d18563e57474a4729a4c42e9",
     "url": "/hospital-management-web/index.html"
   },
   {
@@ -8,7 +8,7 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/hospital-management-web/static/css/2.18fb2ca0.chunk.css"
   },
   {
-    "revision": "10f01de83e7f694bf046",
+    "revision": "7b56449f7e4adb587278",
     "url": "/hospital-management-web/static/css/main.1d65d520.chunk.css"
   },
   {
@@ -20,8 +20,8 @@ self.__precacheManifest = (self.__precacheManifest || []).concat([
     "url": "/hospital-management-web/static/js/2.a63d53d6.chunk.js.LICENSE.txt"
   },
   {
-    "revision": "10f01de83e7f694bf046",
-    "url": "/hospital-management-web/static/js/main.385f8bc2.chunk.js"
+    "revision": "7b56449f7e4adb587278",
+    "url": "/hospital-management-web/static/js/main.795133ce.chunk.js"
   },
   {
     "revision": "eb26f313ce233030937a",

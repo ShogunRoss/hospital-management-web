@@ -1,15 +1,15 @@
 {
   "files": {
     "main.css": "/hospital-management-web/static/css/main.1d65d520.chunk.css",
-    "main.js": "/hospital-management-web/static/js/main.385f8bc2.chunk.js",
-    "main.js.map": "/hospital-management-web/static/js/main.385f8bc2.chunk.js.map",
+    "main.js": "/hospital-management-web/static/js/main.795133ce.chunk.js",
+    "main.js.map": "/hospital-management-web/static/js/main.795133ce.chunk.js.map",
     "runtime-main.js": "/hospital-management-web/static/js/runtime-main.c0c76f2b.js",
     "runtime-main.js.map": "/hospital-management-web/static/js/runtime-main.c0c76f2b.js.map",
     "static/css/2.18fb2ca0.chunk.css": "/hospital-management-web/static/css/2.18fb2ca0.chunk.css",
     "static/js/2.a63d53d6.chunk.js": "/hospital-management-web/static/js/2.a63d53d6.chunk.js",
     "static/js/2.a63d53d6.chunk.js.map": "/hospital-management-web/static/js/2.a63d53d6.chunk.js.map",
     "index.html": "/hospital-management-web/index.html",
-    "precache-manifest.fdc78b85016a14510f53d4b147a6f524.js": "/hospital-management-web/precache-manifest.fdc78b85016a14510f53d4b147a6f524.js",
+    "precache-manifest.e88837d225c3eaea9aa8ec7120b39b0c.js": "/hospital-management-web/precache-manifest.e88837d225c3eaea9aa8ec7120b39b0c.js",
     "service-worker.js": "/hospital-management-web/service-worker.js",
     "static/css/2.18fb2ca0.chunk.css.map": "/hospital-management-web/static/css/2.18fb2ca0.chunk.css.map",
     "static/css/main.1d65d520.chunk.css.map": "/hospital-management-web/static/css/main.1d65d520.chunk.css.map",
@@ -20,6 +20,6 @@
     "static/css/2.18fb2ca0.chunk.css",
     "static/js/2.a63d53d6.chunk.js",
     "static/css/main.1d65d520.chunk.css",
-    "static/js/main.385f8bc2.chunk.js"
+    "static/js/main.795133ce.chunk.js"
   ]
 }
