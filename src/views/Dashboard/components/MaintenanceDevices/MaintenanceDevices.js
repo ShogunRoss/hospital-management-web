@@ -4,6 +4,7 @@ import PropTypes from 'prop-types';
 import { makeStyles } from '@material-ui/styles';
 import { Card, CardContent, Grid, Typography, Avatar } from '@material-ui/core';
 import BuildIcon from '@material-ui/icons/BuildOutlined';
+import InfoCard from '../InfoCard/InfoCard';
 
 const useStyles = makeStyles(theme => ({
   root: {
@@ -34,27 +35,11 @@ const Devices = props => {
   const classes = useStyles();
 
   return (
-    <Card {...rest} className={clsx(classes.root, className)}>
-      <CardContent>
-        <Grid container justify="space-between">
-          <Grid item>
-            <Typography
-              className={classes.title}
-              color="textSecondary"
-              gutterBottom
-              variant="body2">
-              SỐ THIẾT BỊ ĐANG BẢO TRÌ
-            </Typography>
-            <Typography variant="h1">{deviceNumber}</Typography>
-          </Grid>
-          <Grid item>
-            <Avatar className={classes.avatar}>
-              <BuildIcon className={classes.icon} />
-            </Avatar>
-          </Grid>
-        </Grid>
-      </CardContent>
-    </Card>
+    <InfoCard
+      title="SỐ THIẾT BỊ ĐANG BẢO TRÌ"
+      number={deviceNumber}
+      icon={<BuildIcon className={classes.icon} />}
+    />
   );
 };
 
